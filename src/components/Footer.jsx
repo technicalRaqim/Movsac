@@ -151,12 +151,12 @@ const Footer = () => {
                         <div className="footer-brand" data-aos="fade-up" data-aos-delay="0">
                             <img src="/img/Footer-logos/Logf.png" alt="Movsac logo" className="footer-logo" data-aos="zoom-in" data-aos-delay="50" />
                             <div className="company-info">
-                                <p data-aos="fade-up" data-aos-delay="100">Nowe Garbary Office Center</p>
-                                <p data-aos="fade-up" data-aos-delay="150">ul. Małe Garbary 9</p>
-                                <p data-aos="fade-up" data-aos-delay="200">61-756 Poznan, Poland</p>
-                                <p className="vat-info" data-aos="fade-up" data-aos-delay="250">VAT-ID: PL7781454968</p>
-                                <p className="vat-info" data-aos="fade-up" data-aos-delay="300">REGON: 300862280</p>
-                                <p className="vat-info" data-aos="fade-up" data-aos-delay="350">KRS: 0000745671</p>
+                                <b data-aos="fade-up" data-aos-delay="100">Register Address</b>
+                                <p data-aos="fade-up" data-aos-delay="150">70, Shahdana old city Bareilly-243005, UP, IN</p>
+                                <p className="vat-info" data-aos="fade-up" data-aos-delay="250">Phone No: +91 9997235784</p>
+                                <b data-aos="fade-up" data-aos-delay="100">Office Address</b>
+                                <p data-aos="fade-up" data-aos-delay="150">F-153/b 3rd floor Shaheen bagh delhi -110025, IN</p>
+                                <p className="vat-info" data-aos="fade-up" data-aos-delay="250">Phone No: +91 9214042307</p>
                                 <p className="email" data-aos="fade-up" data-aos-delay="400">info@movsac.com</p>
                             </div>
                         </div>
