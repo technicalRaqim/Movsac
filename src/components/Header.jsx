@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import AOS from 'aos';
-import 'aos/dist/aos.css'; // Import the styles!
+import 'aos/dist/aos.css';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,11 +26,12 @@ const Header = () => {
     {
       name: 'Life @ Movsac',
       isDropdown: true,
+      href: '/about',
       children: [
-        { name: 'About Us', href: '/about' },
-        { name: 'Mission & Values', href: '/mission' },
-        { name: 'How we work and Function', href: '/how-we-work' },
-        { name: 'Compliance', href: '/compliance' }
+        { name: 'About Us', href: '/about#about' },
+        { name: 'Mission & Values', href: '/about#mission' },
+        { name: 'How we work and Function', href: '/about#how-we-work' },
+        { name: 'Compliance', href: '/about#compliance' }
       ]
     },
     { name: 'Services', href: '/services' },
@@ -46,14 +48,13 @@ const Header = () => {
       <div className="rolling-text-wrapper">
         {isDropdown ? (
           <div
-            className={`nav-link dropdown-toggle ${isDropdownOpen ? 'show' : ''}`}
+            className={`nav-link dropdown-toggle ${isDropdownOpen ? 'show' : ''} ${location.pathname === '/about' ? 'active' : ''}`}
             role="button"
             onClick={onClick}
             aria-expanded={isDropdownOpen}
           >
             <div className="rolling-text">
               <div className="rolling-text-inner">
-                {/* Original Layer */}
                 <span className="rolling-original">
                   {letters.map((letter, i) => (
                     <span key={i} className="char" style={{ transitionDelay: `${i * 0.05}s` }}>
@@ -61,7 +62,6 @@ const Header = () => {
                     </span>
                   ))}
                 </span>
-                {/* Duplicate Layer */}
                 <span className="rolling-duplicate">
                   {letters.map((letter, i) => (
                     <span key={i} className="char" style={{ transitionDelay: `${i * 0.05}s` }}>
@@ -80,7 +80,6 @@ const Header = () => {
           >
             <div className="rolling-text">
               <div className="rolling-text-inner">
-                {/* Original Layer */}
                 <span className="rolling-original">
                   {letters.map((letter, i) => (
                     <span key={i} className="char" style={{ transitionDelay: `${i * 0.05}s` }}>
@@ -88,7 +87,6 @@ const Header = () => {
                     </span>
                   ))}
                 </span>
-                {/* Duplicate Layer */}
                 <span className="rolling-duplicate">
                   {letters.map((letter, i) => (
                     <span key={i} className="char" style={{ transitionDelay: `${i * 0.05}s` }}>
@@ -108,10 +106,12 @@ const Header = () => {
     <header>
       <nav className={`navbar navbar-expand-lg ${isScrolled ? 'nav-scrolled' : ''}`}>
         <div className="container">
-          {/* Logo - ✅ ABSOLUTE PATH */}
-          <Link className="navbar-brand" to="/" onClick={() => setIsMenuOpen(false)}>
-            <img id="navLogo" src="/img/Logo.png" alt="Movsac Logo" />
-            <span>Movsac</span>
+          {/* Logo - Home Page Link */}
+          <Link className="navbar-brand logo-corner-animation" to="/" onClick={() => setIsMenuOpen(false)}>
+            <div className="logo-box">
+              <img id="navLogo" src="/img/Logo.png" alt="Movsac Logo" className="main-logo" />
+              <span className="logo-brand-text">movsac</span>
+            </div>
           </Link>
 
           {/* Mobile Toggle Button */}
@@ -133,16 +133,21 @@ const Header = () => {
                 <li className={`nav-item ${item.isDropdown ? 'dropdown' : ''}`} key={index}>
                   {item.isDropdown ? (
                     <>
+                      {/* Life @ Movsac - About Us page link */}
                       <RollingText
                         text={item.name}
                         isDropdown={true}
-                        onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                        onClick={() => {
+                          navigate('/about'); // No page reload
+                          setIsMenuOpen(false);
+                        }}
                       />
+                      {/* Dropdown with section IDs */}
                       <ul className={`dropdown-menu border-0 shadow-sm rounded-3 overflow-hidden p-0 ${isDropdownOpen ? 'show' : ''}`}>
                         {item.children.map((child, idx) => (
                           <li key={idx}>
-                            <NavLink
-                              className={({ isActive }) => (isActive ? 'dropdown-item active' : 'dropdown-item')}
+                            <Link
+                              className="dropdown-item"
                               to={child.href}
                               onClick={() => {
                                 setIsMenuOpen(false);
@@ -150,7 +155,7 @@ const Header = () => {
                               }}
                             >
                               {child.name}
-                            </NavLink>
+                            </Link>
                           </li>
                         ))}
                       </ul>

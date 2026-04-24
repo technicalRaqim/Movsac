@@ -15,6 +15,9 @@ export default function Portfolio() {
     });
   }, []);
 
+  // Testimonials Slider State
+  const [currentIndex, setCurrentIndex] = useState(0);
+
   const testimonials = [
     {
       id: 1,
@@ -41,6 +44,14 @@ export default function Portfolio() {
       date: "1/2/2024"
     }
   ];
+
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  };
 
   const caseStudies = [
     {
@@ -191,9 +202,9 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* Testimonials Section */}
+      {/* Testimonials Section - FULL WIDTH WITH BOTTOM RIGHT BUTTONS */}
       <section className="portfolio-testimonials-section mb-5">
-        <div className="container">
+        <div className="container-fluid px-4 px-md-5">
           <h2 className="portfolio-testimonials-title" data-aos="flip-down" data-aos-duration="1000">
             <span data-aos="fade-down" data-aos-delay="100">T</span>
             <span data-aos="fade-down" data-aos-delay="150">e</span>
@@ -208,53 +219,67 @@ export default function Portfolio() {
             <span data-aos="fade-down" data-aos-delay="600">l</span>
             <span data-aos="fade-down" data-aos-delay="650">s</span>
           </h2>
-          <div className="portfolio-testimonials-container">
-            <div className="portfolio-testimonials-scroll">
+
+          {/* Full Width Slider Container */}
+          <div className="portfolio-testimonials-fullwidth">
+            <div
+              className="portfolio-testimonials-track-full"
+              style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+            >
               {testimonials.map((testimonial, index) => (
                 <div
                   key={testimonial.id}
-                  className="portfolio-testimonial-card"
-                  data-aos="zoom-in-up"
-                  data-aos-delay={index * 200}
+                  className="portfolio-testimonial-card-full"
                 >
-                  <div className="portfolio-testimonial-top" data-aos="fade-down" data-aos-delay={index * 200 + 100}>
+                  {/* Avatar - Zoom In Animation */}
+                  <div className="portfolio-testimonial-top" data-aos="zoom-in" data-aos-delay={index * 100}>
                     <img
                       src={testimonial.avatar}
                       alt={testimonial.name}
                       className="portfolio-testimonial-avatar"
-                      data-aos="zoom-in"
-                      data-aos-delay={index * 200 + 150}
                     />
                   </div>
 
-                  <p className="portfolio-testimonial-text" data-aos="fade-up" data-aos-delay={index * 200 + 200}>
-                    {testimonial.quote.split(' ').map((word, wordIndex) => (
-                      <span key={wordIndex} data-aos="fade-in" data-aos-delay={index * 200 + 200 + (wordIndex * 30)}>
-                        {word}{' '}
-                      </span>
-                    ))}
+                  {/* Quote - Fade Up Animation */}
+                  <p className="portfolio-testimonial-text" data-aos="fade-up" data-aos-delay={index * 100 + 100}>
+                    {testimonial.quote}
                   </p>
 
-                  <div className="portfolio-testimonial-footer" data-aos="fade-up" data-aos-delay={index * 200 + 300}>
-                    <div>
-                      <h4 className="portfolio-testimonial-name" data-aos="fade-right" data-aos-delay={index * 200 + 350}>
-                        {testimonial.name.split('').map((char, charIndex) => (
-                          <span key={charIndex} data-aos="zoom-in" data-aos-delay={index * 200 + 350 + (charIndex * 30)}>
-                            {char}
-                          </span>
-                        ))}
+                  {/* Footer - Fade Up Animation */}
+                  <div className="portfolio-testimonial-footer d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-end w-100 gap-2 gap-sm-0" data-aos="fade-up" data-aos-delay={index * 100 + 200}>
+                    <div className="text-start">
+                      <h4 className="portfolio-testimonial-name mb-1" data-aos="fade-in" data-aos-delay={index * 100 + 250}>
+                        {testimonial.name}
                       </h4>
-                      <p className="portfolio-testimonial-role" data-aos="fade-right" data-aos-delay={index * 200 + 400}>
+                      <p className="portfolio-testimonial-role mb-0" data-aos="fade-in" data-aos-delay={index * 100 + 300}>
                         {testimonial.role}
                       </p>
                     </div>
-                    <p className="portfolio-testimonial-date" data-aos="fade-left" data-aos-delay={index * 200 + 450}>
+                    <p className="portfolio-testimonial-date mb-0 text-start text-sm-end" data-aos="fade-in" data-aos-delay={index * 100 + 350}>
                       {testimonial.date}
                     </p>
                   </div>
                 </div>
               ))}
             </div>
+          </div>
+
+          {/* Bottom Right Navigation Buttons */}
+          <div className="testimonial-nav-bottom">
+            <button
+              className="testimonial-nav-btn-bottom"
+              onClick={prevSlide}
+              aria-label="Previous testimonial"
+            >
+              <i className="bi bi-chevron-left"></i>
+            </button>
+            <button
+              className="testimonial-nav-btn-bottom"
+              onClick={nextSlide}
+              aria-label="Next testimonial"
+            >
+              <i className="bi bi-chevron-right"></i>
+            </button>
           </div>
         </div>
       </section>

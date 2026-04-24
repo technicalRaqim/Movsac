@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 import Layout from '../../components/Layout';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -14,6 +15,7 @@ const About = () => {
   const counterRefs = useRef([]);
   const counterSectionRef = useRef(null);
   const animationStarted = useRef(false);
+  const location = useLocation();
 
   useEffect(() => {
     document.body.classList.add('about-page');
@@ -29,6 +31,30 @@ const About = () => {
       easing: 'ease-in-out'
     });
   }, []);
+
+  // Hash scroll functionality - NEW
+  useEffect(() => {
+    const hash = location.hash;
+    if (hash) {
+      // Remove the # from hash
+      const id = hash.replace('#', '');
+      const element = document.getElementById(id);
+      
+      if (element) {
+        // Small delay to ensure DOM is ready
+        setTimeout(() => {
+          const navbarHeight = 80; // Adjust based on your navbar height
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
+          
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }, 100);
+      }
+    }
+  }, [location.hash, location.pathname]);
 
   useEffect(() => {
     const animateCounters = () => {
@@ -94,10 +120,10 @@ const About = () => {
       </div>
 
       {/* ABOUT SECOND CONTENT SECTION START HERE */}
-      <div className="container about-detail">
+      <div className="container about-detail" id='about'>
         <div className="row">
           {/* Left Content - 9 columns */}
-          <div className="col-lg-9 col-md-8">
+          <div className="col-lg-9 col-md-8" >
             <h2 data-aos="fade-up" data-aos-duration="800">
               <span data-aos="fade-up" data-aos-delay="50">About</span>{' '}
               <span data-aos="fade-up" data-aos-delay="100">Us</span>
@@ -176,7 +202,7 @@ const About = () => {
       </div>
 
       {/* ABOUT THIRD MISSION AND VALUES SECTION START HERE */}
-      <div className="container mission-values">
+      <div className="container mission-values" id='mission'>
         <div className="row">
           <div className="col-md-12">
             <h2 data-aos="fade-up" data-aos-duration="800">
@@ -236,7 +262,7 @@ const About = () => {
       </div>
 
       {/* HOW WE WORK SECTION */}
-      <div className="how-we-work-section py-5">
+      <div className="how-we-work-section py-5" id='how-we-work'>
         <div className="container">
           <div className="row mb-5">
             <div className="col-12">
@@ -310,7 +336,7 @@ const About = () => {
       </div>
 
       {/* COMPLIANCE & ADHERENCE SECTION */}
-      <div className="compliance-section py-5">
+      <div className="compliance-section py-5" id='compliance'>
         <div className="container">
           <div className="row mb-5">
             <div className="col-12">

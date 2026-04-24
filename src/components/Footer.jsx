@@ -151,13 +151,13 @@ const Footer = () => {
                         <div className="footer-brand" data-aos="fade-up" data-aos-delay="0">
                             <img src="/img/Footer-logos/Logf.png" alt="Movsac logo" className="footer-logo" data-aos="zoom-in" data-aos-delay="50" />
                             <div className="company-info">
-                                <b data-aos="fade-up" data-aos-delay="100">Register Address</b>
+                                <p data-aos="fade-up" data-aos-delay="100" className='text-dark fw-bold'>Register Address</p>
                                 <p data-aos="fade-up" data-aos-delay="150">70, Shahdana old city Bareilly-243005, UP, IN</p>
-                                <p className="vat-info" data-aos="fade-up" data-aos-delay="250">Phone No: +91 9997235784</p>
-                                <b data-aos="fade-up" data-aos-delay="100">Office Address</b>
-                                <p data-aos="fade-up" data-aos-delay="150">F-153/b 3rd floor Shaheen bagh delhi -110025, IN</p>
-                                <p className="vat-info" data-aos="fade-up" data-aos-delay="250">Phone No: +91 9214042307</p>
-                                <b className="email" data-aos="fade-up" data-aos-delay="400">info@movsac.com</b>
+                                <p data-aos="fade-up" data-aos-delay="200">+91 9997235784</p>
+                                <p className="vat-info" data-aos="fade-up" data-aos-delay="250" className='text-dark fw-bold'>Office:</p>
+                                <p className="vat-info" data-aos="fade-up" data-aos-delay="300">F-153/b 3rd floor Shaheen bagh delhi -110025, IN</p>
+                                <p className="vat-info" data-aos="fade-up" data-aos-delay="350">+ 91 9214042307</p>
+                                <p className="email" data-aos="fade-up" data-aos-delay="400">info@movsac.com</p>
                             </div>
                         </div>
 
@@ -194,6 +194,32 @@ const Footer = () => {
                                     <span data-aos="fade-up" data-aos-delay="950">Subscribe</span>{' '}
                                     <span data-aos="fade-up" data-aos-delay="1000">Now</span>
                                 </button>
+                            </div>
+
+                            {/* Social Icons Section - Responsive Bootstrap */}
+                            <div className="col-12 mt-4" data-aos="fade-up" data-aos-delay="1050">
+                                <div className="d-flex justify-content-center align-items-center gap-3 gap-sm-4 gap-md-5">
+                                    <div data-aos="zoom-in" data-aos-delay="1100">
+                                        <a href="https://www.facebook.com/share/1DkUX78m18/" target="_blank" rel="noopener noreferrer" className="text-decoration-none">
+                                            <i className="bi bi-facebook footer-icon fs-3 fs-sm-4 fs-md-5"></i>
+                                        </a>
+                                    </div>
+                                    <div data-aos="zoom-in" data-aos-delay="1150">
+                                        <a href="https://x.com/onavell151358" target="_blank" rel="noopener noreferrer" className="text-decoration-none">
+                                            <i className="bi bi-twitter footer-icon fs-3 fs-sm-4 fs-md-5"></i>
+                                        </a>
+                                    </div>
+                                    <div data-aos="zoom-in" data-aos-delay="1200">
+                                        <a href="https://www.instagram.com/movsacit?igsh=MW9qeThxZHZrOXo3dg==" target="_blank" rel="noopener noreferrer" className="text-decoration-none">
+                                            <i className="bi bi-instagram footer-icon fs-3 fs-sm-4 fs-md-5"></i>
+                                        </a>
+                                    </div>
+                                    <div data-aos="zoom-in" data-aos-delay="1250">
+                                        <a href="https://www.linkedin.com/company/movsac/" target="_blank" rel="noopener noreferrer" className="text-decoration-none">
+                                            <i className="bi bi-linkedin footer-icon fs-3 fs-sm-4 fs-md-5"></i>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

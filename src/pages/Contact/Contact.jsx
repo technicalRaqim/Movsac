@@ -16,7 +16,7 @@ const Contact = () => {
             once: true,
             offset: 50
         });
-        emailjs.init('2oXH9ZvHTJwGJ0WAo');
+        emailjs.init('1rNo7Bv3dBUZJNftP');
     }, []);
 
     const sendEmail = (e) => {
@@ -32,7 +32,7 @@ const Contact = () => {
             message: formRef.current.message.value
         };
 
-        emailjs.send('service_2jdwaxr', 'template_4fd2hto', templateParams)
+        emailjs.send('service_n49sc5l', 'template_e7yzrby', templateParams)
             .then((result) => {
                 console.log('SUCCESS!', result.text);
                 setStatus('Thank you! Your message has been sent successfully.');
