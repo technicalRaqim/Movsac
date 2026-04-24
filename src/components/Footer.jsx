@@ -157,7 +157,7 @@ const Footer = () => {
                                 <b data-aos="fade-up" data-aos-delay="100">Office Address</b>
                                 <p data-aos="fade-up" data-aos-delay="150">F-153/b 3rd floor Shaheen bagh delhi -110025, IN</p>
                                 <p className="vat-info" data-aos="fade-up" data-aos-delay="250">Phone No: +91 9214042307</p>
-                                <p className="email" data-aos="fade-up" data-aos-delay="400">info@movsac.com</p>
+                                <b className="email" data-aos="fade-up" data-aos-delay="400">info@movsac.com</b>
                             </div>
                         </div>
 
