@@ -9,7 +9,6 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "postbuild": "react-snap"
-    
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
