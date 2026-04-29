@@ -123,6 +123,8 @@ const Home = () => {
 {/* ✅ 2. Helmet yahan add kiya - PDF Page 1 ke mutabiq */}
 <Helmet>
     <title>IT Services – Software & Web Development | Movsac</title>
+    <meta property="og:title" content="IT Services – Software & Web Development | Movsac" />
+
     <meta 
         name="description" 
         content="Movsac offers IT services including web development, mobile apps, software solutions, and digital transformation for modern businesses." 
