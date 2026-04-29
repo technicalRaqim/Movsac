@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Layout from '../../components/Layout';
-
+import { Helmet } from 'react-helmet-async';
 export default function CaseStudyView() {
     const { id } = useParams(); // URL se ID le raha hai
 
@@ -986,8 +986,573 @@ export default function CaseStudyView() {
                 title: "Conclusion",
                 text: "Alkurdi demonstrates how a well-structured digital platform can transform a traditional engineering business into a modern, lead-generating enterprise. By focusing on clarity, trust, and structured information, the platform successfully achieved higher lead quality, improved customer trust, increased revenue opportunities, and strong market positioning."
             }
+        },
+        // ==========================================
+        // ID 8: AMAHA B2B - Corporate Mental Wellness
+        // ==========================================
+        8: {
+            hero: {
+                badge: "Case Study",
+                title: "Amaha B2B",
+                subtitle: "Building a Scalable Corporate Mental Wellness Platform for Enterprises"
+            },
+            industry: {
+                label: "Industry:",
+                value: "HealthTech / Corporate Wellness (B2B SaaS)",
+                label2: "Platform:",
+                value2: "Mobile Application (Android)",
+                description: "The Amaha: Mental Health Therapy (formerly InnerHour) B2B app is designed for organizations and companies to provide mental health support to their employees. This is not a consumer app — it is an enterprise solution used by companies to improve employee well-being and productivity at scale."
+            },
+            bigimg: "/img/csview/Amaha/big.png",
+            links: {
+                viewApp: "https://play.google.com/store/apps/details?id=com.theinnerhour.b2b",
+                viewAppStore: "https://apps.apple.com/in/app/amaha-mental-health-self-care/id1323264990",
+                viewWebsite: "#"
+            },
+            objective: {
+                title: "Objective",
+                subtitle: "The primary goals of the project were:",
+                cards: [
+                    { title: "Employee Wellness", desc: "Support employee mental health at scale" },
+                    { title: "Burnout Reduction", desc: "Reduce employee burnout and stress" },
+                    { title: "Productivity Boost", desc: "Improve focus and work performance" },
+                    { title: "Enterprise SaaS", desc: "Build a scalable B2B subscription model" }
+                ]
+            },
+            challenges: {
+                title: "Challenges",
+                subtitle: "The corporate wellness industry presented several challenges:",
+                cards: [
+                    { title: "Employee Burnout", desc: "Growing employee burnout and stress levels" },
+                    { title: "Low Productivity", desc: "Low productivity due to mental fatigue" },
+                    { title: "Accessibility Gap", desc: "Lack of accessible mental health support" },
+                    { title: "High Attrition", desc: "High attrition rates linked to wellness" }
+                ]
+            },
+            solution: {
+                title: "Our Solution",
+                desc: "We built a corporate wellness ecosystem combining psychology, technology, and SaaS to transform mental health from an individual concern into an organizational strategy.",
+                featuresTitle: "Key Features Delivered:",
+                featuresSubtitle: "The platform focuses on making mental wellness accessible, trackable, and scalable for enterprises.",
+                featuresList: [
+                    "Mood tracking and self-care activities",
+                    "Journaling and reflection tools",
+                    "Behavior analytics dashboard",
+                    "Encrypted user data and privacy controls",
+                    "Scalable SaaS infrastructure",
+                    "Company-wide deployment and management"
+                ],
+                designTitle: "Design & User Experience",
+                designSubtitle: "Designed with employee engagement and privacy in mind.",
+                designList: [
+                    "Clean, calming interface for daily use",
+                    "Personalized wellness dashboard",
+                    "Easy mood and activity tracking",
+                    "Private and secure user experience"
+                ]
+            },
+            userFlow: {
+                title: "User Flow",
+                subtitle: "Core user journey designed for engagement",
+                steps: [
+                    { title: "Company Onboarding", desc: "Organization subscribes and invites employees." },
+                    { title: "Employee Access", desc: "Employees access mental wellness tools." },
+                    { title: "Daily Tracking", desc: "Daily mood tracking and self-care activities." },
+                    { title: "Progress Insights", desc: "Analytics and progress tracking for HR." }
+                ]
+            },
+            boxImages: {
+                box1: "/img/csview/Amaha/1.png",
+                box2: "/img/csview/Amaha/2.png",
+                box3: "/img/csview/Amaha/3.png",
+                box4: "/img/csview/Amaha/big.png"
+            },
+            techStack: {
+                title: "Technology Stack",
+                subtitle: "A collection of platforms and tools that support our end-to-end development workflow",
+                items: [
+                    { title: "Platform", desc: "Mobile Application (Android)" },
+                    { title: "Backend", desc: "Scalable SaaS infrastructure" },
+                    { title: "Data Layer", desc: "Mood + behavior analytics" },
+                    { title: "Security", desc: "Encrypted user data and privacy controls" },
+                    { title: "Deployment", desc: "Enterprise B2B distribution" }
+                ]
+            },
+            businessImpact: {
+                title: "Business Impact & Results",
+                subtitle: "The platform delivered strong, measurable business outcomes",
+                cards: [
+                    {
+                        title: "Enterprise Adoption",
+                        points: ["Used by organizations to support employee wellness", "Scalable across teams and departments"]
+                    },
+                    {
+                        title: "Employee Engagement",
+                        points: ["Daily usage through mood tracking and self-care", "Consistent engagement vs one-time usage"]
+                    },
+                    {
+                        title: "Revenue Model",
+                        points: ["Subscription-based recurring revenue", "High customer lifetime value (LTV)"]
+                    },
+                    {
+                        title: "Productivity Impact",
+                        points: ["Reduced employee burnout", "Improved focus and mental clarity"]
+                    },
+                    {
+                        title: "Retention",
+                        points: ["Better work performance", "Lower attrition rates"]
+                    },
+                    {
+                        title: "Scalability",
+                        points: ["Enterprise-grade deployment", "Multi-organization support"]
+                    }
+                ]
+            },
+            achievements: {
+                title: "Key Achievements",
+                subtitle: "Milestones that define our success",
+                items: [
+                    { title: "B2B Model", desc: "Successfully shifted from B2C to enterprise SaaS" },
+                    { title: "Employee Wellness", desc: "Improved employee well-being at scale" },
+                    { title: "Engagement", desc: "Increased engagement through daily tracking" },
+                    { title: "Revenue Growth", desc: "Enabled recurring business revenue" },
+                    { title: "Enterprise Solution", desc: "Created scalable enterprise solution" }
+                ]
+            },
+            importantInsight: {
+                title: "Important Insight (Market Reality)",
+                text: "In B2B, product quality and employee experience directly affect renewals. Some users report issues like paywalls and pricing concerns. This highlights the importance of: Transparent pricing, Employee-first design, Strong customer support, Continuous product improvement."
+            },
+            conclusion: {
+                title: "Conclusion",
+                text: "Amaha B2B transforms mental health from an individual concern into an organizational strategy. By combining psychology, technology, and SaaS, the platform improved employee well-being, increased engagement, enabled recurring business revenue, and created a scalable enterprise solution."
+            }
+        },
+
+        // ==========================================
+        // ID 9: SKYLEX - Immigration Lawyer
+        // ==========================================
+        9: {
+            hero: {
+                badge: "Case Study",
+                title: "Skylex",
+                subtitle: "AI-Powered Immigration Lawyer Platform"
+            },
+            industry: {
+                label: "Industry:",
+                value: "LegalTech / Immigration Services",
+                label2: "Platform:",
+                value2: "Mobile Application (iOS + Android)",
+                description: "Skylex is an AI-powered immigration lawyer platform that connects users with legal experts for visa, immigration, and citizenship services. The platform simplifies complex immigration processes through technology and expert guidance."
+            },
+            bigimg: "/img/csview/Skylex/big.png",
+            links: {
+                viewApp: "https://play.google.com/store/apps/details?id=com.skylexit.skylex_app",
+                viewAppStore: "https://apps.apple.com/in/app/skylex-immigration-lawyer/id1451202585",
+                viewWebsite: "#"
+            },
+            objective: {
+                title: "Objective",
+                subtitle: "The primary goals of the project were:",
+                cards: [
+                    { title: "Legal Access", desc: "Make immigration legal services accessible" },
+                    { title: "AI Assistance", desc: "Provide AI-powered legal guidance" },
+                    { title: "Expert Connection", desc: "Connect users with verified lawyers" },
+                    { title: "Process Simplification", desc: "Simplify complex immigration processes" }
+                ]
+            },
+            challenges: {
+                title: "Challenges",
+                subtitle: "The immigration services industry presented several challenges:",
+                cards: [
+                    { title: "Complex Processes", desc: "Immigration laws are complex and confusing" },
+                    { title: "High Costs", desc: "Traditional legal services are expensive" },
+                    { title: "Accessibility", desc: "Limited access to quality legal experts" },
+                    { title: "Trust Issues", desc: "Difficulty finding trustworthy lawyers" }
+                ]
+            },
+            solution: {
+                title: "Our Solution",
+                desc: "We developed an AI-powered platform that combines legal expertise with technology to make immigration services accessible, affordable, and efficient.",
+                featuresTitle: "Key Features Delivered:",
+                featuresSubtitle: "The platform focuses on simplifying immigration through AI and expert connectivity.",
+                featuresList: [
+                    "AI-powered legal guidance and document review",
+                    "Direct connection with verified immigration lawyers",
+                    "Case tracking and status updates",
+                    "Document preparation and checklist tools",
+                    "Multi-language support",
+                    "Secure client-lawyer communication"
+                ],
+                designTitle: "Design & User Experience",
+                designSubtitle: "Designed for clarity and trust in legal processes.",
+                designList: [
+                    "Clean, professional interface",
+                    "Step-by-step process guidance",
+                    "Secure document upload system",
+                    "Easy lawyer search and booking"
+                ]
+            },
+            userFlow: {
+                title: "User Flow",
+                subtitle: "Core user journey designed for legal clarity",
+                steps: [
+                    { title: "Assessment", desc: "User completes immigration assessment." },
+                    { title: "AI Guidance", desc: "AI provides initial guidance and recommendations." },
+                    { title: "Lawyer Match", desc: "Matched with verified immigration lawyer." },
+                    { title: "Case Management", desc: "Track case progress and communicate." }
+                ]
+            },
+            boxImages: {
+                box1: "/img/csview/Skylex/1.png",
+                box2: "/img/csview/Skylex/2.png",
+                box3: "/img/csview/Skylex/3.png",
+                box4: "/img/csview/Skylex/big.png"
+            },
+            techStack: {
+                title: "Technology Stack",
+                subtitle: "A collection of platforms and tools that support our end-to-end development workflow",
+                items: [
+                    { title: "Frontend", desc: "React Native (iOS + Android)" },
+                    { title: "Backend", desc: "Node.js / Express" },
+                    { title: "AI Engine", desc: "Legal document analysis and guidance" },
+                    { title: "Database", desc: "Secure cloud storage" },
+                    { title: "Communication", desc: "Encrypted messaging system" }
+                ]
+            },
+            businessImpact: {
+                title: "Business Impact & Results",
+                subtitle: "The platform delivered strong, measurable business outcomes",
+                cards: [
+                    {
+                        title: "Legal Access",
+                        points: ["Democratized access to immigration lawyers", "Reduced barrier to legal services"]
+                    },
+                    {
+                        title: "Cost Reduction",
+                        points: ["Lower legal consultation costs", "Transparent pricing model"]
+                    },
+                    {
+                        title: "Efficiency",
+                        points: ["Faster document preparation", "Streamlined case management"]
+                    },
+                    {
+                        title: "User Trust",
+                        points: ["Verified lawyer network", "Secure communication channels"]
+                    },
+                    {
+                        title: "Scale",
+                        points: ["Multi-country support", "Scalable lawyer marketplace"]
+                    },
+                    {
+                        title: "Satisfaction",
+                        points: ["High user satisfaction rates", "Successful case outcomes"]
+                    }
+                ]
+            },
+            achievements: {
+                title: "Key Achievements",
+                subtitle: "Milestones that define our success",
+                items: [
+                    { title: "AI Integration", desc: "Successfully integrated AI legal guidance" },
+                    { title: "Lawyer Network", desc: "Built verified lawyer marketplace" },
+                    { title: "Accessibility", desc: "Made legal services accessible globally" },
+                    { title: "Trust Platform", desc: "Created trusted legal-tech platform" },
+                    { title: "User Growth", desc: "Consistent user acquisition and retention" }
+                ]
+            },
+            importantInsight: {
+                title: "Important Insight (Market Reality)",
+                text: "LegalTech success depends on trust, accuracy, and compliance. Immigration processes vary by country and change frequently. This highlights the importance of: Up-to-date legal content, Verified expert network, Regulatory compliance, User data security."
+            },
+            conclusion: {
+                title: "Conclusion",
+                text: "Skylex demonstrates how AI and technology can democratize access to legal services. By combining expert legal guidance with intelligent automation, the platform makes immigration processes simpler, faster, and more accessible for users worldwide."
+            }
+        },
+
+        // ==========================================
+        // ID 10: IPREP - K-12 Education
+        // ==========================================
+        10: {
+            hero: {
+                badge: "Case Study",
+                title: "iPrep",
+                subtitle: "Unified Learning Ecosystem for K-12 Education"
+            },
+            industry: {
+                label: "Industry:",
+                value: "EdTech / K-12 Education",
+                label2: "Platform:",
+                value2: " Mobile + Web + Smart Classroom",
+                description: "iPrep is a comprehensive K-12 learning platform that works online and offline, supports multiple languages, and covers all classes in one platform. It is usable in schools, rural areas, and government programs — making it an infrastructure layer for delivering education at scale."
+            },
+            bigimg: "/img/csview/iPrep/big.png",
+            links: {
+                viewApp: "https://play.google.com/store/apps/details?id=org.idreameducation.iprepapp",
+                viewAppStore: "#",
+                viewWebsite: "#"
+            },
+            objective: {
+                title: "Objective",
+                subtitle: "The primary goals of the project were:",
+                cards: [
+                    { title: "Universal Access", desc: "Deliver education to all students regardless of resources" },
+                    { title: "Offline Learning", desc: "Enable learning without internet connectivity" },
+                    { title: "Multi-language", desc: "Support Hindi, English, and regional languages" },
+                    { title: "Complete Curriculum", desc: "Cover KG to Class 12 all subjects" }
+                ]
+            },
+            challenges: {
+                title: "Challenges",
+                subtitle: "The education sector presented several challenges:",
+                cards: [
+                    { title: "Internet Barrier", desc: "Limited or no internet in rural areas" },
+                    { title: "Language Gap", desc: "Content not available in regional languages" },
+                    { title: "Device Limitation", desc: "Students use low-end devices" },
+                    { title: "Quality Content", desc: "Lack of engaging, curriculum-aligned content" }
+                ]
+            },
+            solution: {
+                title: "Our Solution",
+                desc: "We built a unified learning ecosystem that removes barriers of internet, language, and device availability. The platform works offline, supports multiple languages, and runs on any device.",
+                featuresTitle: "Key Features Delivered:",
+                featuresSubtitle: "The platform focuses on accessibility, engagement, and comprehensive curriculum coverage.",
+                featuresList: [
+                    "Complete K-12 curriculum (all subjects)",
+                    "Animated video lessons for concept clarity",
+                    "Practice modules and assessments",
+                    "Interactive simulations (Math and Science)",
+                    "Competitive exam preparation",
+                    "Book library and life skills content",
+                    "Offline sync system",
+                    "Multi-device compatibility"
+                ],
+                designTitle: "Design & User Experience",
+                designSubtitle: "Designed for students, teachers, and institutions in low-resource environments.",
+                designList: [
+                    "Simple, intuitive interface for all ages",
+                    "Visual learning through animations",
+                    "Progress tracking and gamification",
+                    "Teacher dashboard for classroom management"
+                ]
+            },
+            userFlow: {
+                title: "User Flow",
+                subtitle: "Core user journey designed for learning",
+                steps: [
+                    { title: "Select Class", desc: "Student selects class and subject." },
+                    { title: "Watch Lesson", desc: "Watches animated video lesson." },
+                    { title: "Practice", desc: "Practices questions with instant feedback." },
+                    { title: "Track Progress", desc: "Tracks progress and identifies weak areas." }
+                ]
+            },
+            boxImages: {
+                box1: "/img/csview/iPrep/1.png",
+                box2: "/img/csview/iPrep/2.png",
+                box3: "/img/csview/iPrep/3.png",
+                box4: "/img/csview/iPrep/big.png"
+            },
+            techStack: {
+                title: "Technology Stack",
+                subtitle: "A collection of platforms and tools that support our end-to-end development workflow",
+                items: [
+                    { title: "Content Engine", desc: "Curriculum-aligned (CBSE + State boards)" },
+                    { title: "Offline Sync", desc: "Works without internet" },
+                    { title: "Analytics", desc: "Performance tracking dashboard" },
+                    { title: "Multi-device", desc: "Mobile, tablet, smart TV, low-end devices" },
+                    { title: "Languages", desc: "Hindi, English, regional languages" }
+                ]
+            },
+            businessImpact: {
+                title: "Business Impact & Results",
+                subtitle: "The platform delivered strong, measurable business outcomes",
+                cards: [
+                    {
+                        title: "Learning Impact",
+                        points: ["Improved concept understanding through animations", "Students learn at their own pace"]
+                    },
+                    {
+                        title: "Social Impact",
+                        points: ["Used in rural and underserved regions", "Bridged digital education gap"]
+                    },
+                    {
+                        title: "Engagement",
+                        points: ["Regular use for practice and revision", "High exam preparation usage"]
+                    },
+                    {
+                        title: "Reach",
+                        points: ["Thousands of students gained digital access", "Including girls in UP through initiatives"]
+                    },
+                    {
+                        title: "Business Model",
+                        points: ["Subscription-based (schools/institutions)", "Government and CSR partnerships"]
+                    },
+                    {
+                        title: "Scalability",
+                        points: ["Scalable and recurring revenue", "Large-scale deployment ready"]
+                    }
+                ]
+            },
+            achievements: {
+                title: "Key Achievements",
+                subtitle: "Milestones that define our success",
+                items: [
+                    { title: "Accessibility", desc: "Built infrastructure for education delivery at scale" },
+                    { title: "Offline Learning", desc: "Enabled learning without internet" },
+                    { title: "Multi-language", desc: "Supported Hindi, English, and regional languages" },
+                    { title: "Social Impact", desc: "Expanded access to education in rural India" },
+                    { title: "Learning Outcomes", desc: "Improved learning outcomes through technology" }
+                ]
+            },
+            importantInsight: {
+                title: "Important Insight (Market Reality)",
+                text: "EdTech success in India depends on content quality, accessibility, and engagement. Platforms that support offline and multilingual learning win in the market. This highlights the importance of: Localized content, Low-bandwidth design, Device compatibility, Government partnerships."
+            },
+            conclusion: {
+                title: "Conclusion",
+                text: "iPrep transforms education from a classroom-limited experience into a scalable digital infrastructure. By combining accessibility, content, and technology, the platform expanded access to education, improved learning outcomes, and enabled large-scale digital adoption across India."
+            }
+        },
+
+
+        11: {
+            hero: {
+                badge: "Case Study",
+                title: "SK Telecom",
+                subtitle: "Building a Telecom Super App for Data, Services & Customer Lifecycle Management"
+            },
+            industry: {
+                label: "Industry:",
+                value: "Telecom Super App / Customer Management Platform",
+                label2: "Platform:",
+                value2: "Mobile Application",
+                description: "The SK Telecom app is a centralized platform used by millions of telecom users to manage data usage, billing, subscriptions, devices, and personalized services. This is not just an app — it's a digital control center for telecom customers."
+            },
+            bigimg: "/img/csview/SKTelecom/big.png",
+            links: {
+                viewApp: "https://play.google.com/store/apps/details?id=com.sktelecom",
+                viewWebsite: "#"
+            },
+            objective: {
+                title: "Objective",
+                subtitle: "The primary goals of the project were:",
+                cards: [
+                    { title: "Data Visibility", desc: "Provide real-time data usage and billing visibility" },
+                    { title: "Service Integration", desc: "Bring entire telecom experience into one app" },
+                    { title: "Personalization", desc: "Deliver personalized offers and recommendations" },
+                    { title: "Digital Adoption", desc: "Increase digital self-service adoption" }
+                ]
+            },
+            challenges: {
+                title: "Challenges",
+                subtitle: "The telecom industry presented several challenges:",
+                cards: [
+                    { title: "Data Visibility", desc: "Lack of visibility on data usage and billing" },
+                    { title: "Complex Management", desc: "Complex subscription management across platforms" },
+                    { title: "Poor Personalization", desc: "Poor personalization of offers and services" },
+                    { title: "Fragmented Experience", desc: "Multiple services spread across different platforms" }
+                ]
+            },
+            solution: {
+                title: "Our Solution",
+                desc: "We built a telecom super app that transforms telecom from a utility into a digital service platform, combining real-time data, personalization, and service integration.",
+                featuresTitle: "Key Features Delivered:",
+                featuresSubtitle: "The platform focuses on making telecom management simple, personalized, and scalable.",
+                featuresList: [
+                    "Real-time data usage and billing tracking",
+                    "Subscription and plan management",
+                    "Device purchase integration (phones, tablets, accessories)",
+                    "Personalized recommendations based on usage",
+                    "Notifications and service updates",
+                    "Integrated customer dashboard"
+                ],
+                designTitle: "Design & User Experience",
+                designSubtitle: "Designed for high-frequency daily usage and seamless service management.",
+                designList: [
+                    "Clean, dashboard-first interface",
+                    "Real-time usage visualization",
+                    "One-tap plan upgrades and purchases",
+                    "Context-aware personalized offers"
+                ]
+            },
+            userFlow: {
+                title: "User Flow",
+                subtitle: "Core user journey designed for digital self-service",
+                steps: [
+                    { title: "Dashboard", desc: "Open app dashboard to view usage, bills, and services." },
+                    { title: "Manage", desc: "Manage plans, upgrade services, or buy devices." },
+                    { title: "Personalize", desc: "Receive personalized offers based on behavior." },
+                    { title: "Track", desc: "Track data usage and billing in real-time." }
+                ]
+            },
+            boxImages: {
+                box1: "/img/csview/SKTelecom/1.png",
+                box2: "/img/csview/SKTelecom/2.png",
+                box3: "/img/csview/SKTelecom/3.png",
+                box4: "/img/csview/SKTelecom/big.png"
+            },
+            techStack: {
+                title: "Technology Stack",
+                subtitle: "A collection of platforms and tools that support our end-to-end development workflow",
+                items: [
+                    { title: "Platform", desc: "Mobile Application (High-frequency usage)" },
+                    { title: "Backend", desc: "Telecom-grade infrastructure" },
+                    { title: "Data Layer", desc: "Real-time billing and usage tracking" },
+                    { title: "AI Layer", desc: "Recommendation engine" },
+                    { title: "Security", desc: "Billing and identity data protection" }
+                ]
+            },
+            businessImpact: {
+                title: "Business Impact & Results",
+                subtitle: "The platform delivered strong, measurable business outcomes",
+                cards: [
+                    {
+                        title: "Customer Self-Service",
+                        points: ["Reduced dependency on physical stores", "Users manage plans, billing, and services digitally"]
+                    },
+                    {
+                        title: "Revenue Optimization",
+                        points: ["Increased upsell through device purchases", "Plan upgrades and add-on services"]
+                    },
+                    {
+                        title: "Engagement",
+                        points: ["Daily app usage for data tracking", "Bill checking and notifications"]
+                    },
+                    {
+                        title: "Operational Efficiency",
+                        points: ["Reduced customer support load", "Automated service management"]
+                    },
+                    {
+                        title: "Digital Adoption",
+                        points: ["Increased digital service adoption", "Scalable digital operations"]
+                    },
+                    {
+                        title: "Customer Retention",
+                        points: ["Improved customer experience", "Higher retention through personalization"]
+                    }
+                ]
+            },
+            achievements: {
+                title: "Key Achievements",
+                subtitle: "Milestones that define our success",
+                items: [
+                    { title: "Super App", desc: "Built a telecom super app ecosystem" },
+                    { title: "Real-Time Data", desc: "Enabled real-time data and billing tracking" },
+                    { title: "Personalization", desc: "Delivered AI-driven personalized recommendations" },
+                    { title: "Digital Transformation", desc: "Transformed telecom into digital service platform" },
+                    { title: "Scale", desc: "Scaled to millions of active users" }
+                ]
+            },
+            importantInsight: {
+                title: "Important Insight (Market Reality)",
+                text: "Telecom apps must handle high-scale real-time data. User experience directly affects customer retention. Security and privacy are critical for billing and identity data. This highlights the importance of: Telecom-grade infrastructure, Real-time data processing, Strong security protocols, Continuous UX optimization."
+            },
+            conclusion: {
+                title: "Conclusion",
+                text: "The SK Telecom app demonstrates how traditional telecom services can evolve into a digital-first, data-driven platform. By combining real-time data, personalization, and service integration, the platform improved customer experience, increased revenue opportunities, reduced operational costs, and enabled a scalable digital ecosystem."
+            }
         }
-        // 🔽 Yahan pe aap aur IDs add kar sakte hain (2, 3, 4, etc.)
     };
 
     // ✅ ID se data fetch karna
@@ -995,6 +1560,11 @@ export default function CaseStudyView() {
 
     return (
         <Layout>
+<Helmet>
+    {/* Agar aapke paas caseStudy ka data hai, toh aap niche wala title use kar sakte hain */}
+    <title>{`Case Study: ${id} | Movsac`}</title>
+</Helmet>
+
             {/* Hero Section - AOS removed as per your code */}
             <section className="cs-hero-section pt-5">
                 <div className="container">
@@ -1002,7 +1572,7 @@ export default function CaseStudyView() {
                         <div className="col-lg-12 csviewprante">
                             <Link to="/portfolio" className='text-decoration-none'>
                                 <button className="csview-badge">
-                                    {data.hero.badge}
+                                    Go Back
                                 </button>
                             </Link>
                             <h1 className="csview-hero-title">
@@ -1024,9 +1594,23 @@ export default function CaseStudyView() {
                 <div className="row">
                     <div className="col-12 csview-imgdown">
 
-                        {/* ✅ Dynamic Anchor Tags - View App sirf tab dikhayega jab link valid ho */}
+                        {/* ✅ Dynamic Anchor Tags - Smart button logic */}
                         <div className="csview-links mt-3">
-                            {data?.links?.viewApp && data.links.viewApp !== "#" && (
+                            {/* View App Store - Check viewAppStore field */}
+                            {data?.links?.viewAppStore && data.links.viewAppStore !== "#" && data.links.viewAppStore.includes('apps.apple.com') && (
+                                <a
+                                    href={data.links.viewAppStore}
+                                    target="_blank"
+
+                                    rel="noopener noreferrer"
+                                    className="view-website me-4"
+                                >
+                                    View App Store
+                                </a>
+                            )}
+
+                            {/* View App (Play Store) - Check viewApp field, NOT App Store */}
+                            {data?.links?.viewApp && data.links.viewApp !== "#" && !data.links.viewApp.includes('apps.apple.com') && (
                                 <a
                                     href={data.links.viewApp}
                                     target="_blank"
@@ -1036,14 +1620,18 @@ export default function CaseStudyView() {
                                     View App
                                 </a>
                             )}
-                            <a
-                                href={data?.links?.viewWebsite || '#'}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="view-website"
-                            >
-                                View Website
-                            </a>
+
+                            {/* View Website - Show if valid link exists */}
+                            {data?.links?.viewWebsite && data.links.viewWebsite !== "#" && (
+                                <a
+                                    href={data.links.viewWebsite}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="view-website"
+                                >
+                                    View Website
+                                </a>
+                            )}
                         </div>
                         <div className="csview-industry d-flex justify-content-between gap-5">
                             <h3 className='industry-red' data-aos="fade-up">{data.industry.label} <br /> <span className='industry-text'>{data.industry.value}</span></h3>

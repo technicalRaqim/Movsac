@@ -1,9 +1,9 @@
 import { useEffect, useRef } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom'; // added this
 import Layout from '../../components/Layout';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-
+import { Helmet } from 'react-helmet-async';
 const counterData = [
   { value: 15, suffix: '+', label: 'Years of experience' },
   { value: 550, suffix: '+', label: 'Projects executed' },
@@ -15,12 +15,7 @@ const About = () => {
   const counterRefs = useRef([]);
   const counterSectionRef = useRef(null);
   const animationStarted = useRef(false);
-  const location = useLocation();
-
-  useEffect(() => {
-    document.body.classList.add('about-page');
-    return () => document.body.classList.remove('about-page');
-  }, []);
+  const location = useLocation(); // added this
 
   // AOS Initialize
   useEffect(() => {
@@ -32,21 +27,19 @@ const About = () => {
     });
   }, []);
 
-  // Hash scroll functionality - NEW
+  // ✅ YE LOGIC WAPAS ADD KIYA HAI - Iske bagair scrolling nahi chalegi
   useEffect(() => {
     const hash = location.hash;
     if (hash) {
-      // Remove the # from hash
       const id = hash.replace('#', '');
       const element = document.getElementById(id);
-      
+
       if (element) {
-        // Small delay to ensure DOM is ready
         setTimeout(() => {
-          const navbarHeight = 80; // Adjust based on your navbar height
+          const navbarHeight = 90; // Header height
           const elementPosition = element.getBoundingClientRect().top;
           const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
-          
+
           window.scrollTo({
             top: offsetPosition,
             behavior: 'smooth'
@@ -54,8 +47,9 @@ const About = () => {
         }, 100);
       }
     }
-  }, [location.hash, location.pathname]);
+  }, [location]); // Trigger on location change
 
+  // Counter Animation Logic
   useEffect(() => {
     const animateCounters = () => {
       counterData.forEach((counter, index) => {
@@ -63,7 +57,6 @@ const About = () => {
         const suffix = counter.suffix || '';
         const duration = 1200;
         let startTimestamp = null;
-
         const step = (timestamp) => {
           if (!startTimestamp) startTimestamp = timestamp;
           const progress = Math.min((timestamp - startTimestamp) / duration, 1);
@@ -77,7 +70,6 @@ const About = () => {
             counterRefs.current[index].textContent = `${target}${suffix}`;
           }
         };
-
         window.requestAnimationFrame(step);
       });
     };
@@ -93,181 +85,205 @@ const About = () => {
       },
       { threshold: 0.5 }
     );
-
-    if (counterSectionRef.current) {
-      observer.observe(counterSectionRef.current);
-    }
-
+    if (counterSectionRef.current) observer.observe(counterSectionRef.current);
     return () => observer.disconnect();
   }, []);
 
   return (
     <Layout>
-      <div className="container-fluid about" style={{
-        backgroundImage: `url(/img/about/about-main.png)`,
+      <Helmet>
+        <title>About Movsac – IT & Staffing Experts</title>
+        <meta
+          name="description"
+          content="Movsac is a trusted IT and staffing company providing innovative tech solutions and skilled professionals to businesses worldwide."
+        />
+        <meta
+          name="keywords"
+          content="IT company, staffing company, tech experts, recruitment services"
+        />
+      </Helmet>
+
+      <section className="case-study-hero" style={{
+        // linear-gradient se image thodi dark ho jayegi takay white text saaf nazar aaye
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(/img/about/about-main.png)`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        minHeight: '80vh',
-        width: '100%',
+        backgroundRepeat: 'no-repeat',
+        paddingTop: '150px', // Navbar ki height ke liye space (Adjust as needed)
+        paddingBottom: '80px',
+        // Section ko achi height daine ke liye
+        display: 'flex',
+        alignItems: 'center'
       }}>
         <div className="container">
           <div className="row">
             <div className="col-md-12 about-content">
-              <h1 data-aos="fade-up">Life at <span data-aos="fade-up">Movsac</span> Where Innovation <br /> Meets Excellence</h1>
+              <h2 className="hero-title" data-aos="fade-up" style={{ color: '#ffffff' }}>
+
+                <span data-aos="fade-up"> Life at</span>{' '}
+                <span className="hero-highlight" data-aos="fade-up" style={{ color: '#CF3034' }}>Movsac</span>{' '}
+                <span data-aos="fade-up">Where Innovation</span><br />
+                <span data-aos="fade-up">Meets </span>{' '}
+                <span data-aos="fade-up">Excellence</span>{' '}
+
+              </h2>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* ABOUT SECOND CONTENT SECTION START HERE */}
-      <div className="container about-detail" id='about'>
-        <div className="row">
-          {/* Left Content - 9 columns */}
-          <div className="col-lg-9 col-md-8" >
-            <h2 data-aos="fade-up" data-aos-duration="800">
-              <span data-aos="fade-up" data-aos-delay="50">About</span>{' '}
-              <span data-aos="fade-up" data-aos-delay="100">Us</span>
-            </h2>
-            <h6 data-aos="fade-up" data-aos-delay="150">
-              <span data-aos="fade-up" data-aos-delay="200">Bridging</span>{' '}
-              <span data-aos="fade-up" data-aos-delay="250">the</span>{' '}
-              <span data-aos="fade-up" data-aos-delay="300">Gap</span>{' '}
-              <span data-aos="fade-up" data-aos-delay="350">Between</span>{' '}
-              <span data-aos="fade-up" data-aos-delay="400">Elite</span>{' '}
-              <span data-aos="fade-up" data-aos-delay="450">Talent</span>{' '}
-              <span data-aos="fade-up" data-aos-delay="500">and</span>{' '}
-              <span data-aos="fade-up" data-aos-delay="550">Next-Gen</span>{' '}
-              <span data-aos="fade-up" data-aos-delay="600">Technology</span>
-            </h6>
-            <p data-aos="fade-up" data-aos-delay="650">
-              Movsac is a forward-thinking digital engineering firm dedicated to transforming complex business strategies into reliable, production-ready systems. With a core focus on strong architecture and scalable solutions, we empower organizations to navigate the digital landscape with confidence. Our mission is to bridge the gap between innovative ideas and functional reality through expert engineering.
-            </p>
+      {/* ABOUT SECOND CONTENT SECTION - Wrapped in section like CTA */}
+      <section className="about-detail-section" id='about'>
+        <div className="container about-detail">
+          <div className="row">
+            {/* Left Content - 9 columns */}
+            <div className="col-lg-9 col-md-8" >
+              <h2 data-aos="fade-up" data-aos-duration="800">
+                <span data-aos="fade-up" data-aos-delay="50">About</span>{' '}
+                <span data-aos="fade-up" data-aos-delay="100">Us</span>
+              </h2>
+              <h6 data-aos="fade-up" data-aos-delay="150">
+                <span data-aos="fade-up" data-aos-delay="200">Bridging</span>{' '}
+                <span data-aos="fade-up" data-aos-delay="250">the</span>{' '}
+                <span data-aos="fade-up" data-aos-delay="300">Gap</span>{' '}
+                <span data-aos="fade-up" data-aos-delay="350">Between</span>{' '}
+                <span data-aos="fade-up" data-aos-delay="400">Elite</span>{' '}
+                <span data-aos="fade-up" data-aos-delay="450">Talent</span>{' '}
+                <span data-aos="fade-up" data-aos-delay="500">and</span>{' '}
+                <span data-aos="fade-up" data-aos-delay="550">Next-Gen</span>{' '}
+                <span data-aos="fade-up" data-aos-delay="600">Technology</span>
+              </h6>
+              <p data-aos="fade-up" data-aos-delay="650">
+                Movsac is a forward-thinking digital engineering firm dedicated to transforming complex business strategies into reliable, production-ready systems. With a core focus on strong architecture and scalable solutions, we empower organizations to navigate the digital landscape with confidence. Our mission is to bridge the gap between innovative ideas and functional reality through expert engineering.
+              </p>
 
-            <h6 data-aos="fade-up" data-aos-delay="700">
-              <span data-aos="fade-up" data-aos-delay="750">Our</span>{' '}
-              <span data-aos="fade-up" data-aos-delay="800">Journey</span>{' '}
-              <span data-aos="fade-up" data-aos-delay="850">from</span>{' '}
-              <span data-aos="fade-up" data-aos-delay="900">Vision</span>{' '}
-              <span data-aos="fade-up" data-aos-delay="950">to</span>{' '}
-              <span data-aos="fade-up" data-aos-delay="1000">Excellence</span>
-            </h6>
-            <p data-aos="fade-up" data-aos-delay="1050">
-              Founded in 2023, Movsac began with a mission to bridge the gap between complex engineering and user-centric design. Our success story accelerated in early 2024 when we successfully delivered our first large-scale ERP solution, marking our transition into a trusted partner for global tech talent and digital transformation. Today, we continue to scale by combining innovation with reliability in every project we touch.
-            </p>
+              <h6 data-aos="fade-up" data-aos-delay="700">
+                <span data-aos="fade-up" data-aos-delay="750">Our</span>{' '}
+                <span data-aos="fade-up" data-aos-delay="800">Journey</span>{' '}
+                <span data-aos="fade-up" data-aos-delay="850">from</span>{' '}
+                <span data-aos="fade-up" data-aos-delay="900">Vision</span>{' '}
+                <span data-aos="fade-up" data-aos-delay="950">to</span>{' '}
+                <span data-aos="fade-up" data-aos-delay="1000">Excellence</span>
+              </h6>
+              <p data-aos="fade-up" data-aos-delay="1050">
+                Founded in 2023, Movsac began with a mission to bridge the gap between complex engineering and user-centric design. Our success story accelerated in early 2024 when we successfully delivered our first large-scale ERP solution, marking our transition into a trusted partner for global tech talent and digital transformation. Today, we continue to scale by combining innovation with reliability in every project we touch.
+              </p>
 
-            <h6 data-aos="fade-up" data-aos-delay="1100">
-              <span data-aos="fade-up" data-aos-delay="1150">Precision</span>{' '}
-              <span data-aos="fade-up" data-aos-delay="1200">in</span>{' '}
-              <span data-aos="fade-up" data-aos-delay="1250">Design,</span>{' '}
-              <span data-aos="fade-up" data-aos-delay="1300">Excellence</span>{' '}
-              <span data-aos="fade-up" data-aos-delay="1350">in</span>{' '}
-              <span data-aos="fade-up" data-aos-delay="1400">Delivery</span>
-            </h6>
-            <p data-aos="fade-up" data-aos-delay="1450">
-              Our growth is powered by a deep commitment to high-quality UI/UX principles and cutting-edge AI integration. By the end of 2025, Movsac expanded its footprint into global IT recruitment, successfully placing top-tier developers in leading firms. We believe that every pixel and every line of code should serve a purpose, ensuring that our clients receive not just a product, but a competitive advantage in the digital marketplace.
-            </p>
-          </div>
+              <h6 data-aos="fade-up" data-aos-delay="1100">
+                <span data-aos="fade-up" data-aos-delay="1150">Precision</span>{' '}
+                <span data-aos="fade-up" data-aos-delay="1200">in</span>{' '}
+                <span data-aos="fade-up" data-aos-delay="1250">Design,</span>{' '}
+                <span data-aos="fade-up" data-aos-delay="1300">Excellence</span>{' '}
+                <span data-aos="fade-up" data-aos-delay="1350">in</span>{' '}
+                <span data-aos="fade-up" data-aos-delay="1400">Delivery</span>
+              </h6>
+              <p data-aos="fade-up" data-aos-delay="1450">
+                Our growth is powered by a deep commitment to high-quality UI/UX principles and cutting-edge AI integration. By the end of 2025, Movsac expanded its footprint into global IT recruitment, successfully placing top-tier developers in leading firms. We believe that every pixel and every line of code should serve a purpose, ensuring that our clients receive not just a product, but a competitive advantage in the digital marketplace.
+              </p>
+            </div>
 
-          {/* Right Profile Card - 3 columns */}
-          <div className="col-lg-3 col-md-4 about-img-profile" data-aos="fade-up" data-aos-delay="200">
-            <div className="card text-white h-100">
-              <img src="/img/about/Biography-Image.png" className="card-img h-100" alt="Biography" style={{ objectFit: 'cover' }} />
-              <div className="card-img-overlay d-flex flex-column justify-content-end">
-                <h5 className="card-title" data-aos="fade-up" data-aos-delay="300">Billy Madison</h5>
-                <p className="card-text" data-aos="fade-up" data-aos-delay="350">The Founder of Movcas Company</p>
+            {/* Right Profile Card - 3 columns */}
+            <div className="col-lg-3 col-md-4 about-img-profile" data-aos="fade-up" data-aos-delay="200">
+              <div className="card text-white h-100">
+                <img src="/img/about/Biography-Image.png" className="card-img h-100" alt="Biography" style={{ objectFit: 'cover' }} />
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Counter Section - Image Right Side */}
-        <div className="row gx-3 gy-4 mt-5 align-items-stretch" ref={counterSectionRef}>
-          {/* 4 Counters - col-lg-2 each = 8 columns */}
-          {counterData.map((counter, index) => (
-            <div key={counter.label} className="col-12 col-lg-2 col-md-6" data-aos="fade-up" data-aos-delay={index * 100}>
-              <div className="counter-item d-flex flex-column justify-content-center h-100">
-                <h2 ref={(el) => (counterRefs.current[index] = el)}>
-                  0<span>{counter.suffix}</span>
-                </h2>
-                <p data-aos="fade-up" data-aos-delay={index * 100 + 50}>{counter.label}</p>
+          {/* Counter Section - Image Right Side */}
+          <div className="row gx-3 gy-4 mt-5 align-items-stretch" ref={counterSectionRef}>
+            {counterData.map((counter, index) => (
+              <div key={counter.label} className="col-12 col-lg-2 col-md-6" data-aos="fade-up" data-aos-delay={index * 100}>
+                <div className="counter-item d-flex flex-column justify-content-center h-100">
+                  <h2 ref={(el) => (counterRefs.current[index] = el)}>
+                    0<span>{counter.suffix}</span>
+                  </h2>
+                  <p data-aos="fade-up" data-aos-delay={index * 100 + 50}>{counter.label}</p>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
 
-          {/* Image - col-lg-4 = 4 columns (Total 12) */}
-          <div className="col-md-3 col-lg-4 col-12 ">
-            <img src="/img/about/aboutclient.jpg" className="img-fluid w-100 h-100" alt="" style={{ objectFit: 'cover' }} />
+            {/* Image - col-lg-4 = 4 columns (Total 12) */}
+            <div className="col-md-3 col-lg-4 col-12 ">
+              <img src="/img/about/aboutclient.jpg" className="img-fluid w-100 h-100" alt="" style={{ objectFit: 'cover' }} />
+            </div>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* ABOUT THIRD MISSION AND VALUES SECTION START HERE */}
-      <div className="container mission-values" id='mission'>
-        <div className="row">
-          <div className="col-md-12">
-            <h2 data-aos="fade-up" data-aos-duration="800">
-             Mission and
-
-              <span data-aos="fade-up" data-aos-delay="150" className="highlight-span">Values</span>
-            </h2>
-          </div>
-        </div>
-      </div>
-
-      <div className="container mission-card-sec py-5">
-        <div className="row g-4">
-          <div className="col-12 col-md-6 col-lg-4">
-            <div className="mission-card" data-aos="fade-up" data-aos-delay="0">
-              <img src="/img/about/SolutionImage1.png" className="mission-card-img" alt="Empowering Innovation" data-aos="fade-up" data-aos-delay="50" />
-              <div className="mission-card-body">
-                <h5 className="mission-card-title" data-aos="fade-up" data-aos-delay="100">
-                  <span data-aos="fade-up" data-aos-delay="150">Empowering</span>{' '}
-                  <span data-aos="fade-up" data-aos-delay="200">Innovation</span>
-                </h5>
-                <p className="mission-card-text" data-aos="fade-up" data-aos-delay="250">
-                  Integrating advanced AI and modern design to build smart, future-ready digital solutions
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="col-12 col-md-6 col-lg-4">
-            <div className="mission-card" data-aos="fade-up" data-aos-delay="100">
-              <img src="/img/about/SolutionImage2.png" className="mission-card-img" alt="Human-Centric Growth" data-aos="fade-up" data-aos-delay="150" />
-              <div className="mission-card-body">
-                <h5 className="mission-card-title" data-aos="fade-up" data-aos-delay="200">
-                  <span data-aos="fade-up" data-aos-delay="250">Human-Centric</span>{' '}
-                  <span data-aos="fade-up" data-aos-delay="300">Growth</span>
-                </h5>
-                <p className="mission-card-text" data-aos="fade-up" data-aos-delay="350">
-                  Connecting top-tier tech talent with global opportunities to foster a culture of shared success.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="col-12 col-md-6 col-lg-4">
-            <div className="mission-card" data-aos="fade-up" data-aos-delay="200">
-              <img src="/img/about/SolutionImage3.png" className="mission-card-img" alt="Scalable Excellence" data-aos="fade-up" data-aos-delay="250" />
-              <div className="mission-card-body">
-                <h5 className="mission-card-title" data-aos="fade-up" data-aos-delay="300">
-                  <span data-aos="fade-up" data-aos-delay="350">Scalable</span>{' '}
-                  <span data-aos="fade-up" data-aos-delay="400">Excellence</span>
-                </h5>
-                <p className="mission-card-text" data-aos="fade-up" data-aos-delay="450">
-                  Engineering robust architectures and high-performance systems that grow seamlessly with your business
-                </p>
-              </div>
+      <section className="mission-values-section" id='mission'>
+        <div className="container mission-values">
+          <div className="row">
+            <div className="col-md-12">
+              <h2 data-aos="fade-up" data-aos-duration="800">
+                Mission and{' '}
+                <span data-aos="fade-up" data-aos-delay="150" className="highlight-span">Values</span>
+              </h2>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* HOW WE WORK SECTION */}
-      <div className="how-we-work-section py-5" id='how-we-work'>
+      {/* MISSION CARDS SECTION */}
+      <section className="mission-cards-section">
+        <div className="container mission-card-sec py-5">
+          <div className="row g-4">
+            <div className="col-12 col-md-6 col-lg-4">
+              <div className="mission-card" data-aos="fade-up" data-aos-delay="0">
+                <img src="/img/about/SolutionImage1.png" className="mission-card-img" alt="Empowering Innovation" data-aos="fade-up" data-aos-delay="50" />
+                <div className="mission-card-body">
+                  <h5 className="mission-card-title" data-aos="fade-up" data-aos-delay="100">
+                    <span data-aos="fade-up" data-aos-delay="150">Empowering</span>{' '}
+                    <span data-aos="fade-up" data-aos-delay="200">Innovation</span>
+                  </h5>
+                  <p className="mission-card-text" data-aos="fade-up" data-aos-delay="250">
+                    Integrating advanced AI and modern design to build smart, future-ready digital solutions
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="col-12 col-md-6 col-lg-4">
+              <div className="mission-card" data-aos="fade-up" data-aos-delay="100">
+                <img src="/img/about/SolutionImage2.png" className="mission-card-img" alt="Human-Centric Growth" data-aos="fade-up" data-aos-delay="150" />
+                <div className="mission-card-body">
+                  <h5 className="mission-card-title" data-aos="fade-up" data-aos-delay="200">
+                    <span data-aos="fade-up" data-aos-delay="250">Human-Centric</span>{' '}
+                    <span data-aos="fade-up" data-aos-delay="300">Growth</span>
+                  </h5>
+                  <p className="mission-card-text" data-aos="fade-up" data-aos-delay="350">
+                    Connecting top-tier tech talent with global opportunities to foster a culture of shared success.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="col-12 col-md-6 col-lg-4">
+              <div className="mission-card" data-aos="fade-up" data-aos-delay="200">
+                <img src="/img/about/SolutionImage3.png" className="mission-card-img" alt="Scalable Excellence" data-aos="fade-up" data-aos-delay="250" />
+                <div className="mission-card-body">
+                  <h5 className="mission-card-title" data-aos="fade-up" data-aos-delay="300">
+                    <span data-aos="fade-up" data-aos-delay="350">Scalable</span>{' '}
+                    <span data-aos="fade-up" data-aos-delay="400">Excellence</span>
+                  </h5>
+                  <p className="mission-card-text" data-aos="fade-up" data-aos-delay="450">
+                    Engineering robust architectures and high-performance systems that grow seamlessly with your business
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* HOW WE WORK SECTION - Now as a proper Section */}
+      <section className="how-we-work-section py-5" id='how-we-work'>
         <div className="container">
           <div className="row mb-5">
             <div className="col-12">
               <h2 className='mission-card-title' data-aos="fade-up" data-aos-duration="800">
-                  How We Work
+                How We Work{' '}
                 <span data-aos="fade-up" data-aos-delay="250" className="highlight-span ps-1">Function</span>
               </h2>
             </div>
@@ -333,10 +349,9 @@ const About = () => {
             </div>
           </div>
         </div>
-      </div>
-
-      {/* COMPLIANCE & ADHERENCE SECTION */}
-      <div className="compliance-section py-5" id='compliance'>
+      </section>
+      {/* COMPLIANCE & ADHERENCE SECTION - Now as a proper Section */}
+      <section className="compliance-section py-5" id='compliance'>
         <div className="container">
           <div className="row mb-5">
             <div className="col-12">
@@ -413,7 +428,7 @@ const About = () => {
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
     </Layout>
   );

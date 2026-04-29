@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Layout from '../../components/Layout';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-
+import { Helmet } from 'react-helmet-async';
 export default function Industries() {
   // AOS Initialize
   useEffect(() => {
@@ -104,6 +104,18 @@ export default function Industries() {
 
   return (
     <Layout>
+      <Helmet>
+        <title>Industries We Serve – Custom IT Solutions | Movsac</title>
+        <meta
+          name="description"
+          content="Movsac provides specialized IT and staffing solutions across various industries including Finance, Healthcare, Retail, and Technology."
+        />
+        <meta
+          name="keywords"
+          content="industry solutions, fintech solutions, healthcare IT, retail technology, enterprise staffing"
+        />
+      </Helmet>
+
       <section className="case-study-hero">
         <div className="container py-5">
           <div className="row align-items-center pt-5 gy-4">
@@ -130,23 +142,23 @@ export default function Industries() {
 
       <section id="case-study-grid" className="portfolio-section">
         <div className="container">
-            <h1 className="industry-hed" data-aos="fade-down" data-aos-duration="800">
-              <span data-aos="fade-down" data-aos-delay="100">I</span>
-              <span data-aos="fade-down" data-aos-delay="150">n</span>
-              <span data-aos="fade-down" data-aos-delay="200">d</span>
-              <span data-aos="fade-down" data-aos-delay="250">u</span>
-              <span data-aos="fade-down" data-aos-delay="300">s</span>
-              <span data-aos="fade-down" data-aos-delay="350">t</span>
-              <span data-aos="fade-down" data-aos-delay="400">r</span>
-              <span data-aos="fade-down" data-aos-delay="450">i</span>
-              <span data-aos="fade-down" data-aos-delay="500">e</span>
-              <span data-aos="fade-down" data-aos-delay="550">s</span>
-            </h1>
+          <h1 className="industry-hed" data-aos="fade-down" data-aos-duration="800">
+            <span data-aos="fade-down" data-aos-delay="100">I</span>
+            <span data-aos="fade-down" data-aos-delay="150">n</span>
+            <span data-aos="fade-down" data-aos-delay="200">d</span>
+            <span data-aos="fade-down" data-aos-delay="250">u</span>
+            <span data-aos="fade-down" data-aos-delay="300">s</span>
+            <span data-aos="fade-down" data-aos-delay="350">t</span>
+            <span data-aos="fade-down" data-aos-delay="400">r</span>
+            <span data-aos="fade-down" data-aos-delay="450">i</span>
+            <span data-aos="fade-down" data-aos-delay="500">e</span>
+            <span data-aos="fade-down" data-aos-delay="550">s</span>
+          </h1>
           {/* Case Study Grid */}
           <div className="portfolio-grid" >
             {caseStudies.map((study, index) => (
               <div key={study.id} className="portfolio-card" data-aos={study.animation} data-aos-delay={index * 100}>
-                <div 
+                <div
                   className="portfolio-card-bg"
                   style={{ backgroundImage: study.image }}
                 >
@@ -163,11 +175,7 @@ export default function Industries() {
                   <p className="portfolio-card-desc" data-aos="fade-up" data-aos-delay={index * 100 + 200}>
                     {study.description}
                   </p>
-                  <Link to="/case-study" className="portfolio-card-link" data-aos="zoom-in" data-aos-delay={index * 100 + 300}>
-                    <span data-aos="fade-right" data-aos-delay={index * 100 + 350}>Read</span>{' '}
-                    <span data-aos="fade-right" data-aos-delay={index * 100 + 400}>More</span>{' '}
-                    <span data-aos="fade-left" data-aos-delay={index * 100 + 450}>→</span>
-                  </Link>
+
                 </div>
               </div>
             ))}
@@ -190,7 +198,7 @@ export default function Industries() {
               <span data-aos="fade-up" data-aos-delay="450">your</span>{' '}
               <span data-aos="fade-up" data-aos-delay="500">project</span>
             </h2>
-            <Link to="/contact" className="cta-button" data-aos="zoom-in-up" data-aos-delay="600">
+            <Link to="/contact" className="cta-button text-decoration-none" data-aos="zoom-in-up" data-aos-delay="600">
               <span data-aos="fade-right" data-aos-delay="650">Lets</span>{' '}
               <span data-aos="fade-right" data-aos-delay="700">Talk</span>{' '}
               <span data-aos="fade-right" data-aos-delay="750">with</span>{' '}

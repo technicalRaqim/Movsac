@@ -4,6 +4,7 @@ import Layout from '../../components/Layout';
 import AOS from 'aos';
 import emailjs from '@emailjs/browser';
 import 'aos/dist/aos.css';
+import { Helmet } from 'react-helmet-async';
 
 const Contact = () => {
     const [isLoading, setIsLoading] = useState(false);
@@ -16,7 +17,7 @@ const Contact = () => {
             once: true,
             offset: 50
         });
-        emailjs.init('2oXH9ZvHTJwGJ0WAo');
+        emailjs.init('1rNo7Bv3dBUZJNftP');
     }, []);
 
     const sendEmail = (e) => {
@@ -32,7 +33,7 @@ const Contact = () => {
             message: formRef.current.message.value
         };
 
-        emailjs.send('service_2jdwaxr', 'template_4fd2hto', templateParams)
+        emailjs.send('service_n49sc5l', 'template_e7yzrby', templateParams)
             .then((result) => {
                 console.log('SUCCESS!', result.text);
                 setStatus('Thank you! Your message has been sent successfully.');
@@ -48,6 +49,18 @@ const Contact = () => {
 
     return (
         <Layout>
+            <Helmet>
+    <title>Contact Movsac – IT & Staffing Solutions</title>
+    <meta 
+        name="description" 
+        content="Contact Movsac for IT services and staffing solutions. Get expert support for hiring and digital development projects." 
+    />
+    <meta 
+        name="keywords" 
+        content="contact IT company, staffing contact, hire developers" 
+    />
+</Helmet>
+
             <section className="contact-hero">
                 <div className="container">
                     <div className="row align-items-center justify-content-start">

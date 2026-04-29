@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom"; // added useLocation
+import { HelmetProvider } from 'react-helmet-async'; // ✅ HelmetProvider add kiya
 import Home from "./pages/Home/Home";
 import Portfolio from "./pages/Portfoilio/portfolio";
 import CaseStudyView from "./pages/Casestudy-view/casestudy-view";
@@ -13,6 +14,17 @@ import SplashScreen from './components/SplashScreen';
 
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+
+// --- Scroll To Top Logic ---
+const ScrollToTop = () => {
+  const { pathname, hash } = useLocation();
+  useEffect(() => {
+    if (!hash) {
+      window.scrollTo(0, 0);
+    }
+  }, [pathname, hash]);
+  return null;
+};
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -31,7 +43,11 @@ function App() {
   }, [loading]);
 
   return (
-    <>
+    // ✅ Pura content HelmetProvider ke andar wrap kar diya
+    <HelmetProvider>
+      {/* ScrollToTop component ko Routes se pehle lazmi rakhein */}
+      <ScrollToTop />
+
       {loading && <SplashScreen onFinish={() => setLoading(false)} />}
 
       <div style={{
@@ -43,8 +59,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/portfolio" element={<Portfolio />} />
-
-          {/* ✅ DYNAMIC ROUTE - ID ke saath */}
+          
+          {/* ✅ DYNAMIC ROUTE */}
           <Route path="/casestudy-view/:id" element={<CaseStudyView />} />
 
           <Route path="/contact" element={<Contact />} />
@@ -54,7 +70,7 @@ function App() {
           <Route path="/about" element={<About />} />
         </Routes>
       </div>
-    </>
+    </HelmetProvider>
   );
 }
 

@@ -1,10 +1,90 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect, useCallback, memo } from 'react';
 import Layout from '../../components/Layout';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
+import { Helmet } from 'react-helmet-async';
+
+// --- 1. Blog Modal Component ---
+const BlogModal = ({ isOpen, onClose, title, paragraph }) => {
+  if (!isOpen) return null;
+
+  return (
+    <div
+      className="modal fade show d-block bg-dark bg-opacity-50"
+      tabIndex="-1"
+      style={{ zIndex: 1050, backdropFilter: 'blur(4px)' }}
+      onClick={onClose}
+    >
+      <div
+        className="modal-dialog modal-dialog-centered modal-lg"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="modal-content shadow-lg border-0 rounded-4">
+          <div className="modal-header border-0 pb-0 pt-4 px-4">
+            <h5 className="modal-title fw-bold text-dark fs-4">{title}</h5>
+            <button
+              type="button"
+              className="btn-close shadow-none"
+              aria-label="Close"
+              onClick={onClose}
+            ></button>
+          </div>
+          <div className="modal-body text-secondary px-4 py-3" style={{ fontSize: '1.1rem', lineHeight: '1.6' }}>
+            <p style={{ whiteSpace: 'pre-line' }}>{paragraph}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// --- 2. Blog Card Component (Memoized) ---
+const BlogCard = memo(({ blog, index, onReadMore }) => {
+  return (
+    <div className="col-lg-4 col-md-12 col-sm-12 mb-4" data-aos="fade-up" data-aos-delay={index * 100}>
+      <div className={`img-blog ${blog.imageClass}`} data-aos="zoom-in" data-aos-delay={index * 100 + 50}></div>
+      <br />
+      <div className="row-style">
+        <div className="sec-whole" data-aos="fade-up" data-aos-delay={index * 100 + 100}>
+          <div className="sec-combo">
+            <div className="sec-span">
+              <span className="my-span" data-aos="fade-up" data-aos-delay={index * 100 + 150}>{blog.author}</span>
+            </div>
+          </div>
+          <div className="sec-combo1">
+            <div className="sec-span">
+              <span className="my-span" data-aos="fade-up" data-aos-delay={index * 100 + 200}>{blog.date}</span>
+            </div>
+          </div>
+        </div>
+        <div className="title-line">
+          <h6 data-aos="fade-up" data-aos-delay={index * 100 + 250}>{blog.title}</h6>
+          <p data-aos="fade-up" data-aos-delay={index * 100 + 300}>{blog.description}</p>
+        </div>
+        <button
+          type="button"
+          className="btn-large"
+          data-aos="zoom-in"
+          data-aos-delay={index * 100 + 350}
+          onClick={() => onReadMore(blog)}
+        >
+          Read more
+        </button>
+      </div>
+    </div>
+  );
+});
+
+// --- 3. Main Insight Component ---
 const Insight = () => {
-  // AOS Initialize
+  const [blogs, setBlogs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const [modalData, setModalData] = useState({ isOpen: false, title: '', paragraph: '' });
+
+  // Initialize AOS
   useEffect(() => {
     AOS.init({
       duration: 800,
@@ -14,113 +94,164 @@ const Insight = () => {
     });
   }, []);
 
-  const blogs = [
-    {
-      id: 1,
-      imageClass: 'img-blog1',
-      title: 'The Psychology of Colors in Enterprise Software',
-      description: 'Turning complex numbers into actionable insights',
-      author: 'Ross Shamelashvili',
-      date: 'March 23, 2026'
-    },
-    {
-      id: 2,
-      imageClass: 'img-blog2',
-      title: 'Building Data Foundations: The Key to Scalable Enterprise AI',
-      description: 'Our workflow for managing international IT projects',
-      author: 'Ross Shamelashvili',
-      date: 'March 23, 2026'
-    },
-    {
-      id: 3,
-      imageClass: 'img-blog3',
-      title: 'Composable Commerce Cost: How to Optimize Implement',
-      description: 'It tempting to think of AI primarily a question of infrastructure',
-      author: 'Ross Shamelashvili',
-      date: 'March 23, 2026'
-    },
-    {
-      id: 4,
-      imageClass: 'img-blog4',
-      title: 'Composable Commerce Cost: How to Optimize Implement',
-      description: 'It tempting to think of AI primarily a question of infrastructure',
-      author: 'Ross Shamelashvili',
-      date: 'March 23, 2026'
-    },
-    {
-      id: 5,
-      imageClass: 'img-blog5',
-      title: 'The Psychology of Colors in Enterprise Software',
-      description: 'Turning complex numbers into actionable insights',
-      author: 'Ross Shamelashvili',
-      date: 'March 23, 2026'
-    },
-    {
-      id: 6,
-      imageClass: 'img-blog6',
-      title: 'Building Data Foundations: The Key to Scalable Enterprise AI',
-      description: 'Our workflow for managing international IT projects',
-      author: 'Ross Shamelashvili',
-      date: 'March 23, 2026'
-    }
-  ];
+  // --- Data Fetching (NO TIMER) ---
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const mockData = [
+          {
+            id: 1,
+            imageClass: 'img-blog1',
+            title: 'The Psychology of Colors in Enterprise Software',
+            description: 'Color is more than a visual choice; it directly impacts how users think, feel, and make decisions.',
+            content: 'Color is more than a visual choice in enterprise software it directly impacts how users think, feel, and make decisions. The right color system can simplify complex dashboards, guide attention to critical data, and create a smoother user experience for teams working under pressure.\n\nFor example, blue often builds trust and professionalism, making it popular for financial and SaaS platforms. Green is commonly used for success states, growth metrics, or positive performance indicators. Red highlights urgent actions, risks, or declining numbers, while yellow can draw attention to warnings or pending tasks.\n\nWhen applied strategically, colors turn overwhelming numbers into clear, actionable insights. Instead of users searching through data, thoughtful color cues help them instantly recognize patterns, priorities, and opportunities making enterprise software smarter, faster, and easier to use.'
+          },
+          {
+            id: 2,
+            imageClass: 'img-blog2',
+            title: 'Building Data Foundations: The Key to Scalable Enterprise AI',
+            description: 'Strong AI systems are built on strong data foundations, impacting how accurately models learn and perform.',
+            content: 'Strong AI systems are built on strong data foundations it directly impacts how accurately models learn, predict, and perform. Without clean, structured, and well-managed data, even advanced AI systems fail to deliver reliable business outcomes.\n\nA proper foundation includes centralized databases, clear governance rules, and seamless integration across multiple enterprise systems. This ensures that data remains consistent, accessible, and usable across departments and global teams.\n\nWhen applied strategically, strong data foundations turn fragmented information into unified intelligence. Instead of struggling with scattered datasets, enterprises gain structured insights that help AI scale efficiently, making systems smarter, more stable, and more impactful.'
+          },
+          {
+            id: 3,
+            imageClass: 'img-blog3',
+            title: 'Composable Commerce Cost: How to Optimize Implement',
+            description: 'Composable commerce impacts how efficiently businesses manage digital infrastructure and long-term costs.',
+            content: 'Composable commerce is more than a flexible architecture it directly impacts how efficiently businesses manage digital infrastructure and long-term costs. The right setup can reduce complexity, improve scalability, and optimize performance across platforms.\n\nFor example, selecting only necessary services avoids redundancy, while modular integrations allow teams to upgrade systems without rebuilding everything. Poor planning, however, leads to unnecessary tools, higher maintenance costs, and operational inefficiencies.\n\nWhen applied strategically, composable commerce turns complex system architecture into controlled, scalable investments. Instead of overspending on infrastructure, businesses gain flexibility and efficiency that makes digital growth more sustainable and cost-effective.'
+          },
+          {
+            id: 4,
+            imageClass: 'img-blog4',
+            title: 'Microservices Architecture in Enterprise Scaling',
+            description: 'Microservices architecture impacts how systems scale, evolve, and perform under enterprise-level demand.',
+            content: 'Microservices architecture is more than a technical design choice it directly impacts how systems scale, evolve, and perform under enterprise-level demand. It allows applications to be broken into smaller independent services.\n\nEach service can be developed, deployed, and maintained separately, improving speed and flexibility. This reduces system-wide failures and allows teams to work in parallel without blocking each other’s progress.\n\nWhen applied strategically, microservices turn large monolithic systems into scalable ecosystems. Instead of managing one complex application, enterprises manage multiple flexible services that improve resilience, speed, and long-term scalability.'
+          },
+          {
+            id: 5,
+            imageClass: 'img-blog5',
+            title: 'Security by Design in Enterprise Software',
+            description: 'Security by design impacts how safely enterprise systems operate from the ground up.',
+            content: 'Security by design is more than an add-on feature it directly impacts how safely enterprise systems operate from the ground up. It ensures protection is built into every layer of development from the beginning.\n\nThis includes secure coding practices, encryption standards, identity management, and continuous vulnerability testing. By addressing risks early in the design phase, enterprises reduce the chance of breaches later in production.\n\nWhen applied strategically, security by design turns complex systems into trusted environments. Instead of reacting to threats, organizations proactively prevent them, making enterprise software safer, stronger, and more reliable.'
+          },
+          {
+            id: 6,
+            imageClass: 'img-blog6',
+            title: 'Observability in Distributed Systems',
+            description: 'Observability impacts how well enterprises understand system behavior in real time.',
+            content: 'Observability is more than monitoring it directly impacts how well enterprises understand system behavior in real time. It helps teams track performance, detect issues, and analyze system health across distributed environments.\n\nThrough logs, metrics, and tracing, engineers can identify bottlenecks and failures before they affect users. This improves system reliability and reduces downtime in large-scale infrastructures.\n\nWhen applied strategically, observability turns complex distributed systems into transparent ecosystems. Instead of guessing system behavior, teams gain real-time insights that make operations more stable, predictable, and efficient.'
+          },
+          {
+            id: 7,
+            imageClass: 'img-blog1',
+            title: 'The Role of Metadata in Enterprise Data Systems',
+            description: 'Metadata impacts how data is organized, understood, and used across enterprise systems.',
+            content: 'Metadata is more than supporting information it directly impacts how data is organized, understood, and used across enterprise systems. It adds structure to raw data, making it easier to manage at scale.\n\nIt helps classify datasets, improve searchability, and support governance policies across organizations. Without metadata, large data systems become difficult to navigate and control.\n\nWhen applied strategically, metadata turns raw datasets into structured intelligence. Instead of dealing with unorganized information, enterprises gain clarity, control, and improved data usability across systems.'
+          },
+          {
+            id: 8,
+            imageClass: 'img-blog2',
+            title: 'Personalization Engines in SaaS Platforms',
+            description: 'Personalization engines impact how users interact with SaaS platforms on a daily basis.',
+            content: 'Personalization engines are more than recommendation systems they directly impact how users interact with SaaS platforms on a daily basis. They tailor experiences based on user behavior and preferences.\n\nBy analyzing actions and patterns, systems can adjust content, features, and workflows in real time. This improves engagement and ensures users see what is most relevant to them.\n\nWhen applied strategically, personalization turns generic platforms into adaptive experiences. Instead of one-size-fits-all interfaces, users get tailored journeys that improve satisfaction, retention, and product value.'
+          },
+          {
+            id: 9,
+            imageClass: 'img-blog3',
+            title: 'Change Management in Digital Transformation',
+            description: 'Change management impacts how smoothly organizations adapt to digital transformation.',
+            content: 'Change management is more than introducing new tools it directly impacts how smoothly organizations adapt to digital transformation. It ensures teams transition effectively to new systems and workflows.\n\nThis includes communication, training, and gradual adoption strategies that reduce resistance and confusion. Without proper change management, even good systems fail due to low user adoption.\n\nWhen applied strategically, change management turns transformation into a structured process. Instead of disruption and resistance, organizations achieve smoother transitions and stronger long-term adoption.'
+          },
+          {
+            id: 10,
+            imageClass: 'img-blog4',
+            title: 'Legacy System Modernization Strategies',
+            description: 'Legacy modernization impacts how efficiently enterprises operate in modern digital environments.',
+            content: 'Legacy modernization is more than upgrading old systems it directly impacts how efficiently enterprises operate in modern digital environments. It replaces outdated infrastructure with scalable solutions.\n\nThis process often involves gradual migration, API integration, or full system replacement depending on business needs. It helps reduce technical debt and improve system performance.\n\nWhen applied strategically, modernization turns outdated systems into future-ready platforms. Instead of limitations from old infrastructure, enterprises gain flexibility, speed, and improved integration capabilities.'
+          },
+          {
+            id: 11,
+            imageClass: 'img-blog5',
+            title: 'Performance Optimization in Enterprise Dashboards',
+            description: 'Dashboard optimization impacts how quickly users can interpret and act on data insights.',
+            content: 'Dashboard optimization is more than improving speed it directly impacts how quickly users can interpret and act on data insights. Performance plays a key role in usability.\n\nTechniques like caching, optimized queries, and efficient rendering help ensure dashboards remain responsive even with large datasets. Poor performance can slow decision-making significantly.\n\nWhen applied strategically, optimization turns heavy dashboards into real-time tools. Instead of delays and lag, users experience smooth, fast, and reliable data interactions.'
+          },
+          {
+            id: 12,
+            imageClass: 'img-blog6',
+            title: 'Governance in Multi-Tenant SaaS Systems',
+            description: 'Governance in SaaS systems impacts how securely multiple clients operate within a shared environment.',
+            content: 'Governance in SaaS systems is more than access control it directly impacts how securely multiple clients operate within a shared environment. It ensures structure, compliance, and data separation.\n\nThis includes role-based permissions, monitoring systems, and strict policy enforcement to protect user data across tenants. Without governance, multi-tenant systems become vulnerable and unmanageable.\n\nWhen applied strategically, governance turns shared platforms into secure ecosystems. Instead of risk and confusion, enterprises gain control, compliance, and scalable SaaS operations.'
+          }
+        ];
 
-  // User Icon SVG
-  const UserIcon = () => (
-    <svg className="my-svg" xmlns="http://www.w3.org/2000/svg" width="16" height="18" viewBox="0 0 16 18" fill="none">
-      <path d="M0.75 16.75V15.75C0.75 13.8935 1.4875 12.113 2.80025 10.8003C4.11301 9.4875 5.89348 8.75 7.75 8.75M7.75 8.75C9.60652 8.75 11.387 9.4875 12.6997 10.8003C14.0125 12.113 14.75 13.8935 14.75 15.75V16.75M7.75 8.75C8.81087 8.75 9.82828 8.32857 10.5784 7.57843C11.3286 6.82828 11.75 5.81087 11.75 4.75C11.75 3.68913 11.3286 2.67172 10.5784 1.92157C9.82828 1.17143 8.81087 0.75 7.75 0.75C6.68913 0.75 5.67172 1.17143 4.92157 1.92157C4.17143 2.67172 3.75 3.68913 3.75 4.75C3.75 5.81087 4.17143 6.82828 4.92157 7.57843C5.67172 8.32857 6.68913 8.75 7.75 8.75Z" stroke="#CF3034" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
+        setBlogs(mockData);
+      } catch (err) {
+        setError('Failed to load blogs');
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  // Calendar Icon SVG
-  const CalendarIcon = () => (
-    <svg className="my-svg" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-      <path d="M10.5962 16.75H7.3141C4.21995 16.75 2.67246 16.75 1.71164 15.7884C0.75082 14.8267 0.75 13.2801 0.75 10.1859V8.54487C0.75 5.45072 0.75 3.90323 1.71164 2.94241C2.67328 1.98159 4.21995 1.98077 7.3141 1.98077H10.5962C13.6903 1.98077 15.2378 1.98077 16.1986 2.94241C17.1594 3.90405 17.1603 5.45072 17.1603 8.54487V10.1859C17.1603 13.2801 17.1603 14.8275 16.1986 15.7884C15.6628 16.325 14.9449 16.5621 13.8782 16.6663M4.85256 1.98077V0.75M13.0577 1.98077V0.75M16.75 6.08333H7.92949M0.75 6.08333H3.92949" stroke="#CF3034" strokeWidth="1.5" strokeLinecap="round" />
-      <path d="M13.8774 12.6475C13.8774 12.8651 13.791 13.0738 13.6371 13.2277C13.4832 13.3816 13.2745 13.468 13.0569 13.468C12.8393 13.468 12.6306 13.3816 12.4767 13.2277C12.3228 13.0738 12.2364 12.8651 12.2364 12.6475C12.2364 12.4299 12.3228 12.2212 12.4767 12.0673C12.6306 11.9134 12.8393 11.827 13.0569 11.827C13.2745 11.827 13.4832 11.9134 13.6371 12.0673C13.791 12.2212 13.8774 12.4299 13.8774 12.6475ZM13.8774 9.36543C13.8774 9.58305 13.791 9.79175 13.6371 9.94562C13.4832 10.0995 13.2745 10.1859 13.0569 10.1859C12.8393 10.1859 12.6306 10.0995 12.4767 9.94562C12.3228 9.79175 12.2364 9.58305 12.2364 9.36543C12.2364 9.14782 12.3228 8.93912 12.4767 8.78524C12.6306 8.63137 12.8393 8.54492 13.0569 8.54492C13.2745 8.54492 13.4832 8.63137 13.6371 8.78524C13.791 8.93912 13.8774 9.14782 13.8774 9.36543ZM9.77484 12.6475C9.77484 12.8651 9.68839 13.0738 9.53452 13.2277C9.38064 13.3816 9.17194 13.468 8.95433 13.468C8.73671 13.468 8.52801 13.3816 8.37414 13.2277C8.22026 13.0738 8.13381 12.8651 8.13381 12.6475C8.13381 12.4299 8.22026 12.2212 8.37414 12.0673C8.52801 11.9134 8.73671 11.827 8.95433 11.827C9.17194 11.827 9.38064 11.9134 9.53452 12.0673C9.68839 12.2212 9.77484 12.4299 9.77484 12.6475ZM9.77484 9.36543C9.77484 9.58305 9.68839 9.79175 9.53452 9.94562C9.38064 10.0995 9.17194 10.1859 8.95433 10.1859C8.73671 10.1859 8.52801 10.0995 8.37414 9.94562C8.22026 9.79175 8.13381 9.58305 8.13381 9.36543C8.13381 9.14782 8.22026 8.93912 8.37414 8.78524C8.52801 8.63137 8.73671 8.54492 8.95433 8.54492C9.17194 8.54492 9.38064 8.63137 9.53452 8.78524C9.68839 8.93912 9.77484 9.14782 9.77484 9.36543ZM5.67228 12.6475C5.67228 12.8651 5.58583 13.0738 5.43195 13.2277C5.27808 13.3816 5.06938 13.468 4.85176 13.468C4.63415 13.468 4.42545 13.3816 4.27157 13.2277C4.1177 13.0738 4.03125 12.8651 4.03125 12.6475C4.03125 12.4299 4.1177 12.2212 4.27157 12.0673C4.42545 11.9134 4.63415 11.827 4.85176 11.827C5.06938 11.827 5.27808 11.9134 5.43195 12.0673C5.58583 12.2212 5.67228 12.4299 5.67228 12.6475ZM5.67228 9.36543C5.67228 9.58305 5.58583 9.79175 5.43195 9.94562C5.27808 10.0995 5.06938 10.1859 4.85176 10.1859C4.63415 10.1859 4.42545 10.0995 4.27157 9.94562C4.1177 9.79175 4.03125 9.58305 4.03125 9.36543C4.03125 9.14782 4.1177 8.93912 4.27157 8.78524C4.42545 8.63137 4.63415 8.54492 4.85176 8.54492C5.06938 8.54492 5.27808 8.63137 5.43195 8.78524C5.58583 8.93912 5.67228 9.14782 5.67228 9.36543Z" fill="#CF3034" />
-    </svg>
-  );
+    fetchBlogs();
+  }, []);
 
-  const BlogCard = ({ blog, index }) => (
-    <div className="col-lg-4 col-md-12 col-sm-12 mb-4" data-aos="fade-up" data-aos-delay={index * 100}>
-      <div className={blog.imageClass} data-aos="zoom-in" data-aos-delay={index * 100 + 50}></div>
-      <br />
-      <div className="row-style">
-        <div className="sec-whole" data-aos="fade-up" data-aos-delay={index * 100 + 100}>
-          <div className="sec-combo">
-            <div className="sec-svg">
-              <UserIcon />
-            </div>
-            <div className="sec-span">
-              <span className="my-span" data-aos="fade-up" data-aos-delay={index * 100 + 150}>{blog.author}</span>
-            </div>
-          </div>
-          <div className="sec-combo1">
-            <div className="sec-svg">
-              <CalendarIcon />
-            </div>
-            <div className="sec-span">
-              <span className="my-span" data-aos="fade-up" data-aos-delay={index * 100 + 200}>{blog.date}</span>
-            </div>
-          </div>
+  // Stable handlers with useCallback
+  const handleOpenModal = useCallback((blog) => {
+    setModalData({ isOpen: true, title: blog.title, paragraph: blog.content || blog.description });
+  }, []);
+
+  const handleCloseModal = useCallback(() => {
+    setModalData(prev => ({ ...prev, isOpen: false }));
+  }, []);
+
+  // Blog Section Component
+  const BlogSection = ({ title, subtitle, blogList }) => (
+    <div className="container py-5 sec-back">
+      <div className="sec-blogs">
+        <h6 data-aos="fade-up" data-aos-delay="0">
+          {title}
+          {subtitle && (
+            <span data-aos="zoom-in" data-aos-delay="150"> {subtitle}</span>
+          )}
+        </h6>
+        <div className="row">
+          {blogList.map((blog, index) => (
+            <BlogCard
+              key={blog.id}
+              blog={blog}
+              index={index}
+              onReadMore={handleOpenModal}
+            />
+          ))}
         </div>
-        <div className="title-line">
-          {/* Bade text ko span mein nahi dala, direct animation diya */}
-          <h6 data-aos="fade-up" data-aos-delay={index * 100 + 250}>{blog.title}</h6>
-          <p data-aos="fade-up" data-aos-delay={index * 100 + 300}>{blog.description}</p>
-        </div>
-        <button type="button" className="btn-large" data-aos="zoom-in" data-aos-delay={index * 100 + 350}>Read more</button>
       </div>
     </div>
   );
 
+  if (loading) return <Layout><div className="container py-5 text-center">Loading...</div></Layout>;
+  if (error) return <Layout><div className="container py-5 text-center text-danger">{error}</div></Layout>;
+
   return (
     <Layout>
+      <Helmet>
+        <title>Movsac Blog – Tech Insights & Updates</title>
+        <meta name="description" content="Stay updated with the latest technology trends, coding tips, and IT insights from Movsac experts." />
+        <meta name="keywords" content="tech blog, IT insights, coding tips, software trends" />
+      </Helmet>
+
+      <BlogModal
+        isOpen={modalData.isOpen}
+        onClose={handleCloseModal}
+        title={modalData.title}
+        paragraph={modalData.paragraph}
+      />
+
       <section className="Blog-hero">
         <div className="container py-5">
           <div className="row align-items-center gy-4">
             <div className="col-lg-12">
               <h2 className="hero-title" data-aos="fade-up" data-aos-duration="800">
-                {/* Chhote text ko span mein dala */}
                 <span data-aos="fade-up" data-aos-delay="50">Expert</span>
                 <span className="hero-highlight ms-2" data-aos="zoom-in" data-aos-delay="100">insights</span>
                 <span data-aos="fade-up" data-aos-delay="150">on</span>
@@ -138,53 +269,15 @@ const Insight = () => {
           </div>
         </div>
       </section>
+
       <section className='sec-bolgss'>
-        <div className="container py-5 sec-back">
-          <div className="sec-blogs">
-            <h6 data-aos="fade-up" data-aos-delay="0">Blogs</h6>
-
-            {/* First Row */}
-            <div className="row">
-              {blogs.slice(0, 3).map((blog, index) => (
-                <BlogCard key={blog.id} blog={blog} index={index} />
-              ))}
-            </div>
-
-            <br />
-
-            {/* Second Row */}
-            <div className="row">
-              {blogs.slice(3, 6).map((blog, index) => (
-                <BlogCard key={blog.id} blog={blog} index={index + 3} />
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <div className="container py-5 sec-back">
-          <div className="sec-blogs">
-            <h6 data-aos="fade-up" data-aos-delay="0">
-              Stories for
-              <span data-aos="zoom-in" data-aos-delay="150">decision-makers</span>
-            </h6>
-
-            {/* First Row */}
-            <div className="row">
-              {blogs.slice(0, 3).map((blog, index) => (
-                <BlogCard key={blog.id} blog={blog} index={index + 6} />
-              ))}
-            </div>
-
-            <br />
-
-            {/* Second Row */}
-            <div className="row">
-              {blogs.slice(3, 6).map((blog, index) => (
-                <BlogCard key={blog.id} blog={blog} index={index + 9} />
-              ))}
-            </div>
-          </div>
-        </div>
+        <BlogSection title="Blogs" blogList={blogs.slice(0, 3)} />
+        <br />
+        <BlogSection title="Industry " subtitle="Perspectives" blogList={blogs.slice(3, 6)} />
+        <br />
+        <BlogSection title="Technology" subtitle="Deep Dives" blogList={blogs.slice(6, 9)} />
+        <br />
+        <BlogSection title="Strategy" subtitle="and Growth" blogList={blogs.slice(9, 12)} />
       </section>
     </Layout>
   );

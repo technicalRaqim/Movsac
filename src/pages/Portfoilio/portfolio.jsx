@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Layout from '../../components/Layout';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-
+import { Helmet } from 'react-helmet-async';
 export default function Portfolio() {
   // AOS Initialize
   useEffect(() => {
@@ -21,11 +21,11 @@ export default function Portfolio() {
   const testimonials = [
     {
       id: 1,
-      quote: "Movsac Solutions offers a high caliber of resources skilled in Microsoft Azure, .NET, mobile & Quality Assurance. Over the past three years, we were very pleased with the service provided by Movsac Solutions development teams & executive management.",
-      name: "Ross Shamaleshvili",
-      role: "Manager, American Group",
+      quote: "The delivery approach was clear, consistent, and aligned to our business goals. The team helped us move quickly without sacrificing quality, and the collaboration with product and UX was outstanding.",
+      name: "Mohd Gufran",
+      role: "Owner of Qumash fashion",
       avatar: "img/Home/fm.png",
-      date: "12/2/2024"
+
     },
     {
       id: 2,
@@ -33,15 +33,7 @@ export default function Portfolio() {
       name: "Nava Navrozashvili",
       role: "Product Manager, Flyhex",
       avatar: "img/Home/male.png",
-      date: "3/2/2024"
-    },
-    {
-      id: 3,
-      quote: "Their experience in building intuitive digital experiences helped our brand launch faster and with stronger user acceptance. The team went above and beyond to support our timelines and product vision.",
-      name: "Ross Shamaleshvili",
-      role: "Manager, American Group",
-      avatar: "img/Home/fm.png",
-      date: "1/2/2024"
+
     }
   ];
 
@@ -109,10 +101,55 @@ export default function Portfolio() {
       image: '/img/csview/Alkurdi/big.png',
       gradient: 'linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,1) 50%, rgba(0,0,0,1) 100%)',
       animation: 'fade-up'
+    },
+    {
+      id: 8,
+      title: 'Amaha B2B',
+      description: 'Corporate mental wellness platform with enterprise SaaS model',
+      image: '/img/csview/Amaha/big.png',
+      gradient: 'linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,1) 50%, rgba(0,0,0,1) 100%)',
+      animation: 'fade-up'
+    },
+    {
+      id: 9,
+      title: 'Skylex',
+      description: 'AI-powered immigration lawyer platform with global legal access',
+      image: '/img/csview/Skylex/big.png',
+      gradient: 'linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,1) 50%, rgba(0,0,0,1) 100%)',
+      animation: 'fade-up'
+    },
+    {
+      id: 10,
+      title: 'iPrep',
+      description: 'K-12 education platform with offline learning for rural India',
+      image: '/img/csview/iPrep/big.png',
+      gradient: 'linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,1) 50%, rgba(0,0,0,1) 100%)',
+      animation: 'fade-up'
+    },
+
+    {
+      id: 12,
+      title: 'SK Telecom',
+      description: 'Telecom super app with real-time data management and digital ecosystem',
+      image: '/img/csview/SKTelecom/big.png',
+      gradient: 'linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,1) 50%, rgba(0,0,0,1) 100%)',
+      animation: 'fade-up'
     }
   ];
   return (
     <Layout>
+      <Helmet>
+        <title>Our Work – Movsac Projects & Clients</title>
+        <meta
+          name="description"
+          content="Discover Movsac's successful IT projects and staffing solutions delivered to clients across industries."
+        />
+        <meta
+          name="keywords"
+          content="IT portfolio, client projects, case studies"
+        />
+      </Helmet>
+
       <section className="case-study-hero">
         <div className="container py-5">
           <div className="row align-items-center pt-5 gy-4">
@@ -125,7 +162,7 @@ export default function Portfolio() {
                 <span data-aos="fade-up" data-aos-delay="500">Excellence</span>
               </h2>
               <div className="mt-4" data-aos="zoom-in-up" data-aos-delay="600">
-                <Link className="portfoliobtn">
+                <Link className="portfoliobtn" to="/contact">
                   <span data-aos="fade-right" data-aos-delay="700">Let's</span>{' '}
                   <span data-aos="fade-right" data-aos-delay="800">make</span>{' '}
                   <span data-aos="fade-right" data-aos-delay="900">Projects</span>
@@ -236,7 +273,7 @@ export default function Portfolio() {
                     <img
                       src={testimonial.avatar}
                       alt={testimonial.name}
-                      className="portfolio-testimonial-avatar"
+                      className="portfolio-testimonial-avatar roud"
                     />
                   </div>
 
@@ -255,9 +292,7 @@ export default function Portfolio() {
                         {testimonial.role}
                       </p>
                     </div>
-                    <p className="portfolio-testimonial-date mb-0 text-start text-sm-end" data-aos="fade-in" data-aos-delay={index * 100 + 350}>
-                      {testimonial.date}
-                    </p>
+
                   </div>
                 </div>
               ))}

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Layout from '../../components/Layout';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-
+import { Helmet } from 'react-helmet-async';
 const MovsacServices = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [itemsPerView, setItemsPerView] = useState(1);
@@ -44,16 +44,6 @@ const MovsacServices = () => {
   }, []);
 
   // Auto-slide logic
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentIndex((prev) => {
-        const next = prev + 1;
-        return next > testimonials.length - itemsPerView ? 0 : next;
-      });
-    }, 4000);
-
-    return () => clearInterval(timer);
-  }, [testimonials.length, itemsPerView]);
 
   // AOS Initialize
   useEffect(() => {
@@ -102,6 +92,18 @@ const MovsacServices = () => {
 
   return (
     <Layout>
+      <Helmet>
+        <title>Our Services – IT Solutions, Staffing & Web Development | Movsac</title>
+        <meta
+          name="description"
+          content="Explore Movsac services including IT solutions, software development, web development, and staffing services. Hire experts or build digital products with us."
+        />
+        <meta
+          name="keywords"
+          content="IT services, staffing services, recruitment, web development, software development, hire developers, IT company India"
+        />
+      </Helmet>
+
       {/* main section starts */}
       <section className="sec-bg">
         <div className="container">
@@ -127,14 +129,16 @@ const MovsacServices = () => {
 
             {/* Responsive Slider - No Overflow Hidden, JS Managed */}
             <div className="row pt-3">
-              <div className="d-flex flex-wrap flex-md-nowrap gap-3 gap-md-4">
+              <div className="d-flex flex-wrap  flex-md-nowrap gap-3 gap-md-4">
                 {visibleTestimonials.map((item, index) => (
                   <div
-                    className={itemsPerView === 2 ? "col-md-6" : "col-12"}
+                    className={itemsPerView === 2 ? "col-md-6" : "col-12 "}
                     key={currentIndex + index}
                     style={{
                       transition: 'all 0.5s ease-in-out',
-                      flex: itemsPerView === 2 ? '0 0 calc(50% - 1rem)' : '0 0 100%'
+                      flex: itemsPerView === 2 ? '0 0 calc(50% - 1rem)' : '0 0 100%',
+
+
                     }}
                     data-aos="fade-up"
                     data-aos-duration="400"
@@ -142,14 +146,14 @@ const MovsacServices = () => {
                   >
                     <div className={(currentIndex + index) % 2 === 0 ? "sec-cols" : "sec-cols1"}>
                       <h5 data-aos="fade-up" data-aos-duration="400" data-aos-delay={index * 50 + 25}>{item.name}</h5>
-                      <p data-aos="fade-up" data-aos-duration="400" data-aos-delay={index * 50 + 50}>"{item.text}"</p>
-                      <h6 data-aos="fade-up" data-aos-duration="400" data-aos-delay={index * 50 + 75}>
+                      <p data-aos="fade-up" data-aos-duration="400" data-aos-delay={index * 50 + 50} className='pb-5'>"{item.text}"</p>
+                      {/* <h6 data-aos="fade-up" data-aos-duration="400" data-aos-delay={index * 50 + 75}>
                         Learn More
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="15" viewBox="0 0 18 15" fill="none">
                           <path d="M14.6906 6.75241H0.75C0.551088 6.75241 0.360322 6.83142 0.21967 6.97208C0.0790178 7.11273 0 7.30349 0 7.50241C0 7.70132 0.0790178 7.89208 0.21967 8.03274C0.360322 8.17339 0.551088 8.25241 0.75 8.25241H14.6906L9.21797 13.7204C9.07686 13.8615 8.99759 14.0529 8.99759 14.2524C8.99759 14.452 9.07686 14.6433 9.21797 14.7844C9.35907 14.9255 9.55045 15.0048 9.75 15.0048C9.94955 15.0048 10.1409 14.9255 10.282 14.7844L17.032 8.03444C17.1022 7.96473 17.1579 7.88184 17.1959 7.79053C17.2338 7.69922 17.2534 7.6013 17.2534 7.50241C17.2534 7.40351 17.2338 7.30559 17.1959 7.21428C17.1579 7.12297 17.1022 7.04008 17.032 6.97037L10.282 0.220375C10.2122 0.150507 10.1292 0.0950853 10.0379 0.0572734C9.94665 0.0194615 9.84881 1.94773e-09 9.75 0C9.65119 -1.94773e-09 9.55335 0.0194615 9.46207 0.0572734C9.37078 0.0950853 9.28784 0.150507 9.21797 0.220375C9.1481 0.290242 9.09268 0.373186 9.05487 0.464472C9.01705 0.555758 8.99759 0.653598 8.99759 0.752406C8.99759 0.851213 9.01705 0.949053 9.05487 1.04034C9.09268 1.13163 9.1481 1.21457 9.21797 1.28444L14.6906 6.75241Z" fill="white" />
                         </svg>
                         <span className="learn-line"></span>
-                      </h6>
+                      </h6> */}
                     </div>
                   </div>
                 ))}
@@ -165,9 +169,9 @@ const MovsacServices = () => {
                   </svg>
                 </span>
               </div>
-              <div className="sec-icon1" onClick={nextSlide} style={{ cursor: 'pointer' }}>
+              <div className="sec-icons" onClick={nextSlide} style={{ cursor: 'pointer' }}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <path d="M18.5 12L5 12M13 18C13 18 19 13.581 19 12C19 10.419 13 6 13 6" stroke="#CF3034" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M18.5 12L5 12M13 18C13 18 19 13.581 19 12C19 10.419 13 6 13 6" stroke="black" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </div>
             </div>

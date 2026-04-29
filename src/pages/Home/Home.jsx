@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import Layout from '../../components/Layout';
-
+import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 const Home = () => {
     const videoRef = useRef(null);
 
@@ -13,25 +14,19 @@ const Home = () => {
 
     const testimonials = [
         {
-            quote: "Movsac Solutions offers a high caliber of resources skilled in Microsoft Azure, .NET, mobile & Quality Assurance. Over the past three years, we were very pleased with the service provided by Movsac Solutions development teams & executive management.",
-            name: "Ross Shamaleshvili",
-            role: "Manager, American Group",
+            quote: "The delivery approach was clear, consistent, and aligned to our business goals. The team helped us move quickly without sacrificing quality, and the collaboration with product and UX was outstanding.",
+            name: "Mohd Gufran",
+            role: "Owner of Qumash fashion",
             avatar: "img/Home/fm.png",
             color: "var(--red-button-color)"
         },
+
         {
-            quote: "The delivery approach was clear, consistent, and aligned to our business goals. The team helped us move quickly without sacrificing quality, and the collaboration with product and UX was outstanding.",
+            quote: "Movsac Solutions offers a high caliber of resources skilled in Microsoft Azure, .NET, mobile & Quality Assurance. Over the past three years, we were very pleased with the service provided by Movsac Solutions development teams & executive management.",
             name: "Nava Navrozashvili",
             role: "Product Manager, Flyhex",
             avatar: "img/Home/male.png",
             color: "#4f4c7d"
-        },
-        {
-            quote: "Their experience in building intuitive digital experiences helped our brand launch faster and with stronger user acceptance. The team went above and beyond to support our timelines and product vision.",
-            name: "Noah Benjamin",
-            role: "UX/UI Designer, KFC",
-            avatar: "img/Home/male.png",
-            color: "#1f2937"
         }
     ];
 
@@ -124,6 +119,20 @@ const Home = () => {
 
     return (
         <Layout>
+
+{/* ✅ 2. Helmet yahan add kiya - PDF Page 1 ke mutabiq */}
+<Helmet>
+    <title>IT Services – Software & Web Development | Movsac</title>
+    <meta 
+        name="description" 
+        content="Movsac offers IT services including web development, mobile apps, software solutions, and digital transformation for modern businesses." 
+    />
+    <meta 
+        name="keywords" 
+        content="IT services, software development, web development, mobile apps" 
+    />
+</Helmet>
+
             <section className="hero-section">
                 <div className="container">
                     {/* Hero Header - Title + Description */}
@@ -206,7 +215,9 @@ const Home = () => {
                             </h2>
                         </div>
                         <div className="col-lg-4 text-lg-end">
-                            <button className="btn-see-all" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+                            <Link 
+                            to="/services"
+                             className="btn-see-all text-decoration-none" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
                                 See All Services
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path
@@ -217,7 +228,7 @@ const Home = () => {
                                         strokeLinejoin="round"
                                     />
                                 </svg>
-                            </button>
+                            </Link>
                         </div>
                     </div>
 
@@ -235,9 +246,9 @@ const Home = () => {
                                     <path d="M22 25.5H28C29.1046 25.5 30 26.3954 30 27.5V28C30 29.1046 29.1046 30 28 30H27" stroke="#CF3034" strokeWidth="1.5" strokeLinecap="round" />
                                 </svg>
                             </div>
-                            <h4 className="service-name" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">Strategic Technology Consulting</h4>
+                            <h4 className="service-name" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">IT Solutions</h4>
                             <p className="service-desc" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
-                                From architecture audits to digital transformation strategy, we help leaders align technology with business goals for measurable ROI.
+→ IT solutions help businesses improve efficiency and performance by using modern technology, ensuring secure, scalable, and reliable systems for smooth operations.
                             </p>
                         </div>
 
@@ -252,9 +263,9 @@ const Home = () => {
                                     <path d="M22 25.5H28C29.1046 25.5 30 26.3954 30 27.5V28C30 29.1046 29.1046 30 28 30H27" stroke="#CF3034" strokeWidth="1.5" strokeLinecap="round" />
                                 </svg>
                             </div>
-                            <h4 className="service-name" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">Strategic Technology Consulting</h4>
+                            <h4 className="service-name" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">Management Consulting</h4>
                             <p className="service-desc" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000">
-                                From architecture audits to digital transformation strategy, we help leaders align technology with business goals for measurable ROI.
+→ Management consulting helps organizations solve complex problems and thrive by providing expert advice and innovative strategies.
                             </p>
                         </div>
 
@@ -269,9 +280,9 @@ const Home = () => {
                                     <path d="M22 25.5H28C29.1046 25.5 30 26.3954 30 27.5V28C30 29.1046 29.1046 30 28 30H27" stroke="#CF3034" strokeWidth="1.5" strokeLinecap="round" />
                                 </svg>
                             </div>
-                            <h4 className="service-name" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000">Strategic Technology Consulting</h4>
+                            <h4 className="service-name" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000">Staff Augmentation</h4>
                             <p className="service-desc" data-aos="fade-up" data-aos-delay="400" data-aos-duration="1000">
-                                From architecture audits to digital transformation strategy, we help leaders align technology with business goals for measurable ROI.
+→ Staff augmentation brings the right talent to your team quickly, helping you scale up and meet your business goals with ease.
                             </p>
                         </div>
 
@@ -286,9 +297,9 @@ const Home = () => {
                                     <path d="M22 25.5H28C29.1046 25.5 30 26.3954 30 27.5V28C30 29.1046 29.1046 30 28 30H27" stroke="#CF3034" strokeWidth="1.5" strokeLinecap="round" />
                                 </svg>
                             </div>
-                            <h4 className="service-name" data-aos="fade-up" data-aos-delay="400" data-aos-duration="1000">Strategic Technology Consulting</h4>
+                            <h4 className="service-name" data-aos="fade-up" data-aos-delay="400" data-aos-duration="1000">Business Solutions / Delivery & Integration</h4>
                             <p className="service-desc" data-aos="fade-up" data-aos-delay="500" data-aos-duration="1000">
-                                From architecture audits to digital transformation strategy, we help leaders align technology with business goals for measurable ROI.
+→ Business solutions and delivery & integration ensure your systems work seamlessly together, providing efficient and effective solutions tailored to your needs.
                             </p>
                         </div>
 
@@ -305,7 +316,7 @@ const Home = () => {
                             </div>
                             <h4 className="service-name" data-aos="fade-up" data-aos-delay="500" data-aos-duration="1000">Strategic Technology Consulting</h4>
                             <p className="service-desc" data-aos="fade-up" data-aos-delay="600" data-aos-duration="1000">
-                                From architecture audits to digital transformation strategy, we help leaders align technology with business goals for measurable ROI.
+                              →  From architecture audits to digital transformation strategy, we help leaders align technology with business goals for measurable ROI.
                             </p>
                         </div>
                     </div>
@@ -673,7 +684,7 @@ const Home = () => {
                             <div key={item.name} className="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay={index * 200} data-aos-duration="1000">
                                 <div className={`testimonial-card testimonial-card-small ${testimonialIndex === index ? 'active' : ''}`}>
                                     <div className="testimonial-small-img">
-                                        <img src={item.avatar} alt={item.name} />
+                                        <img src={item.avatar} alt={item.name}  className='roud'/>
                                     </div>
                                     <div className="testimonial-small-content">
                                         <h5 data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">{item.name}</h5>

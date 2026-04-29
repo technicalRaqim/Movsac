@@ -1,6 +1,7 @@
 ﻿import React, { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
     // AOS Initialize
@@ -49,7 +50,9 @@ const Footer = () => {
                                         <span data-aos="fade-up" data-aos-delay="950">message</span>
                                     </p>
                                 </div>
-                                <button className="btn-contact" data-aos="zoom-in" data-aos-delay="1000">
+                                <Link
+                                to="/contact"
+                                 className="btn-contact text-decoration-none" data-aos="zoom-in" data-aos-delay="1000">
                                     <span data-aos="fade-up" data-aos-delay="1050">Contact</span>{' '}
                                     <span data-aos="fade-up" data-aos-delay="1100">us</span>
                                     <span data-aos="fade-up" data-aos-delay="1150">
@@ -63,7 +66,7 @@ const Footer = () => {
                                             />
                                         </svg>
                                     </span>
-                                </button>
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -100,7 +103,7 @@ const Footer = () => {
                             </p>
                         </div>
                         <div className="client-box" data-aos="fade-up" data-aos-delay="200">
-                            <img src="/img/Footer-logos/sgn.png" alt="Qumash" className="client-logo" data-aos="zoom-in" data-aos-delay="250" />
+                            <img src="/img/Footer-logos/sgn.png" alt="Qumash" className="client-logo " data-aos="zoom-in" data-aos-delay="250" />
                             <p className="client-desc" data-aos="fade-up" data-aos-delay="300">
                                 Qumash is a marketplace for unique global designs, aiming to connect the world and showcase...
                             </p>
@@ -126,7 +129,7 @@ const Footer = () => {
                                 <img src="/img/Footer-logos/Mirco.png" alt="Microsoft" data-aos="zoom-in" data-aos-delay="100" />
                                 <img src="/img/Footer-logos/aws.png" alt="AWS" data-aos="zoom-in" data-aos-delay="150" />
                                 <img src="/img/Footer-logos/Google.png" alt="Google Cloud" data-aos="zoom-in" data-aos-delay="200" />
-                                <img src="/img/Footer-logos/wpp.png" alt="Premium Partner" data-aos="zoom-in" data-aos-delay="250" />
+
                             </div>
                         </div>
                         <div>
@@ -136,9 +139,7 @@ const Footer = () => {
                             </h6>
                             <div className="recognized-logos">
                                 <img src="/img/Footer-logos/star.png" alt="Clutch" data-aos="zoom-in" data-aos-delay="450" />
-                                <img src="/img/Footer-logos/inc.png" alt="Inc. 5000" data-aos="zoom-in" data-aos-delay="500" />
-                                <img src="/img/Footer-logos/year.png" alt="EY Entrepreneur of the Year" data-aos="zoom-in" data-aos-delay="550" />
-                                <img src="/img/Footer-logos/For.png" alt="Forbes" data-aos="zoom-in" data-aos-delay="600" />
+
                             </div>
                         </div>
                     </div>

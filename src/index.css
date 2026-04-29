@@ -123,12 +123,12 @@
   font-family: var(--font-cta);
   text-decoration: none;
   display: inline-block;
-  
+
 }
 
 .logo-box {
   position: relative;
- 
+
   overflow: visible;
   transition: width 0.4s ease-out;
 }
@@ -240,6 +240,7 @@
 .nav-link.active {
   color: var(--red-button-color) !important;
 }
+
 /* ============================================
    LOGO CORNER ANIMATION - ULTRA SMOOTH
    ============================================ */
@@ -272,7 +273,8 @@
 .logo-brand-text {
   font-size: 1.7rem;
   font-weight: 700;
-  color: var(--white-color);  /* White for default navbar */
+  color: var(--white-color);
+  /* White for default navbar */
   position: absolute;
   left: 0;
   bottom: -10px;
@@ -307,7 +309,8 @@
    SCROLLED STATE - TEXT BLACK
    ============================================ */
 .navbar-expand-lg.nav-scrolled .logo-brand-text {
-  color: var(--black-text) !important;  /* Black when scrolled */
+  color: var(--black-text) !important;
+  /* Black when scrolled */
 }
 
 
@@ -395,7 +398,9 @@
   font-weight: 600;
   border: none;
   transition: all 0.5s ease-in-out;
-}/* ============================================
+}
+
+/* ============================================
    CONTACT SECTION
    ============================================ */
 .contact-hero {
@@ -2155,24 +2160,33 @@ Tabs
 /* ============================================
    PORTFOLIO TESTIMONIALS - FULL WIDTH SLIDER
    ============================================ */
-.portfolio-testimonials-section{
-  padding: 20px 0px ;
+/* ============================================
+   PORTFOLIO TESTIMONIALS - FULL WIDTH SLIDER
+   ============================================ */
+.portfolio-testimonials-section {
+  padding: 20px 0px;
+  /* Padding remains same */
   background-color: var(--pink-bg);
+  /* Background remains same */
 }
+
 /* Full Width Container */
 .portfolio-testimonials-fullwidth {
   width: 90%;
   overflow: hidden;
   position: relative;
   margin: auto;
+  /* Fixed: Allows vertical scrolling when mouse is over the container */
+  touch-action: pan-y !important;
 }
 
 /* Track - Full Width */
 .portfolio-testimonials-track-full {
   display: flex;
   transition: transform 0.5s ease-in-out;
-  touch-action: none;
-  -webkit-overflow-scrolling: auto;
+  /* FIXED: Changed from 'none' to 'pan-y' to allow vertical scrolling */
+  touch-action: pan-y !important;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Single Card - Full Width */
@@ -2203,36 +2217,70 @@ Tabs
   }
 }
 
-/* Bottom Right Navigation */
+/* Bottom Right Navigation Wrapper */
 .testimonial-nav-bottom {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  gap: 15px;
-  margin-top: 25px;
-  padding-right: 10px;
+  gap: 12px;
+  margin-top: 30px;
+  padding-right: 5%;
 }
 
-/* Bottom Navigation Buttons */
+/* Professional Button Styling - Fixed Position */
 .testimonial-nav-btn-bottom {
-  width: 45px;
-  height: 45px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
-  border: 2px solid #CF3034;
+  border: 1.5px solid #CF3034;
+  /* Solid border */
   background: #ffffff;
   color: #CF3034;
-  font-size: 18px;
+  font-size: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.3s ease;
+  /* Sirf color aur background change hoga, position nahi */
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
+/* Hover State - No Translate/Movement */
 .testimonial-nav-btn-bottom:hover {
   background: #CF3034;
   color: #ffffff;
+  border-color: #CF3034;
+  /* Transform yahan se remove kar diya gaya hai */
 }
+
+/* Active State - Click color feedback only */
+.testimonial-nav-btn-bottom:active {
+  background: #a82326;
+  /* Slightly darker red on click */
+  border-color: #a82326;
+}
+
+/* Icon refinement - No movement */
+.testimonial-nav-btn-bottom i {
+  line-height: 0;
+  /* Icon ki movement ka logic bhi remove kar diya hai */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .testimonial-nav-bottom {
+    justify-content: center;
+    padding-right: 0;
+  }
+
+  .testimonial-nav-btn-bottom {
+    width: 44px;
+    height: 44px;
+    font-size: 16px;
+  }
+}
+
 
 @media (max-width: 768px) {
   .testimonial-nav-btn-bottom {
@@ -2385,6 +2433,8 @@ Tabs
   margin-bottom: 12px;
   object-fit: contain;
   display: block;
+  width: 150px;
+  height: 160px;
 }
 
 .client-desc {
@@ -2614,10 +2664,11 @@ Tabs
   color: var(--gray-text);
   text-decoration: none;
 }
-.footer-icon{
+
+.footer-icon {
   font-size: 30px;
-  color:#5b5b5b;
-  text-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  color: #5b5b5b;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 /* ============================================
@@ -3835,6 +3886,10 @@ Tabs
   margin-top: 40px;
 }
 
+.roud {
+  border-radius: 50px;
+}
+
 .mission-values h2 {
   color: #000;
   font-family: "Plus Jakarta Sans";
@@ -4552,6 +4607,8 @@ Tabs
   height: 48px;
 }
 
+
+
 /* BLOGS PAGE CSS SATRT HERE  */
 
 .sec-blogs h6 {
@@ -4906,6 +4963,7 @@ element.style {
 
 
 }
+
 /* ==========================================
    BASE STYLES (Mobile First)
    ========================================== */
@@ -4922,11 +4980,13 @@ element.style {
 .csview-links {
   display: flex;
   flex-direction: row;
-  justify-content: flex-end; /* Button hamesha right mein */
+  justify-content: flex-end;
+  /* Button hamesha right mein */
   align-items: center;
   gap: 10px;
   width: 100%;
-  order: 1; /* Pehle buttons */
+  order: 1;
+  /* Pehle buttons */
 }
 
 .view-app {
@@ -4945,7 +5005,8 @@ element.style {
   transition: all 0.3s ease;
   font-size: 14px;
   white-space: nowrap;
-  flex-shrink: 0; /* Button shrink na ho */
+  flex-shrink: 0;
+  /* Button shrink na ho */
 }
 
 .view-website {
@@ -4963,7 +5024,8 @@ element.style {
   transition: all 0.3s ease;
   font-size: 14px;
   white-space: nowrap;
-  flex-shrink: 0; /* Button shrink na ho */
+  flex-shrink: 0;
+  /* Button shrink na ho */
 }
 
 /* ✅ Mobile mein industry neeche row mein */
@@ -4974,7 +5036,8 @@ element.style {
   align-items: flex-start;
   width: 100%;
   gap: 15px;
-  order: 2; /* Baad mein industry */
+  order: 2;
+  /* Baad mein industry */
 }
 
 .industry-red {
@@ -4996,7 +5059,8 @@ element.style {
   font-style: normal;
   font-weight: 400;
   line-height: 22px;
-  display: block; /* New line mein */
+  display: block;
+  /* New line mein */
 }
 
 /* ==========================================
@@ -5012,13 +5076,15 @@ element.style {
 
   .csview-links {
     width: auto;
-    order: 2; /* Right side mein */
+    order: 2;
+    /* Right side mein */
     justify-content: flex-end;
   }
 
   .csview-industry {
     width: auto;
-    order: 1; /* Left side mein */
+    order: 1;
+    /* Left side mein */
     justify-content: flex-start;
     gap: 30px;
   }
@@ -5033,7 +5099,8 @@ element.style {
     font-size: 17px;
     line-height: 24px;
     text-align: left;
-    flex: 0 0 auto; /* Auto width */
+    flex: 0 0 auto;
+    /* Auto width */
   }
 
   .industry-text {
