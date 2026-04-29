@@ -186,7 +186,10 @@ const SplashScreen = ({ onFinish }) => {
 
     video.load();
 
-    // ❌ Fallback timeout remove kar diya - ab video khatam hone ka wait hoga
+    // ❌ Fallback timeout - video khatam hone ka 8-second backup
+    const fallbackTimeout = setTimeout(() => {
+      onFinish();
+    }, 8000);
 
     // Resize handler
     const handleResize = () => {
@@ -200,6 +203,7 @@ const SplashScreen = ({ onFinish }) => {
       video.removeEventListener("ended", handleEnded);
       video.removeEventListener("error", handleError);
       window.removeEventListener("resize", handleResize);
+      clearTimeout(fallbackTimeout);
     };
   }, [onFinish]);
 
@@ -218,6 +222,7 @@ const SplashScreen = ({ onFinish }) => {
           ref={videoRef}
           src="/preloader.mov"
           muted
+          autoPlay
           playsInline
           preload="auto"
           className={isMobile ? "splash-video-mobile" : "splash-video-desktop"}
