@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useLayoutEffect } from "react";
 
 const SplashScreen = ({ loading, onFinish }) => {
   const videoRef = useRef(null);
@@ -75,7 +75,7 @@ const SplashScreen = ({ loading, onFinish }) => {
   }).current;
 
   // Inject keyframes & CSS
-  useEffect(() => {
+  useLayoutEffect(() => {
     const styleSheet = document.createElement("style");
     styleSheet.id = "splash-screen-styles";
     styleSheet.innerText = `
@@ -136,7 +136,7 @@ const SplashScreen = ({ loading, onFinish }) => {
     };
   }, []);
 
-  // Video load and play
+  // Video load and play - use useEffect for server safety
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
@@ -172,7 +172,6 @@ const SplashScreen = ({ loading, onFinish }) => {
       video.play().catch(() => {});
     };
 
-    // Video khatam hone par onFinish call hoga
     const handleEnded = () => {
       if (fallbackTimeout) clearTimeout(fallbackTimeout);
       setTimeout(onFinish, 200);
@@ -194,7 +193,6 @@ const SplashScreen = ({ loading, onFinish }) => {
       onFinish();
     }, 8000);
 
-    // Resize handler
     const handleResize = () => {
       applyVideoStyles();
     };
