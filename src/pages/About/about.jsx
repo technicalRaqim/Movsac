@@ -93,6 +93,7 @@ const About = () => {
     <Layout>
       <Helmet>
         <title>About Movsac – IT & Staffing Experts</title>
+            <meta property="og:title" content="IT Services – Software & Web Development | Movsac - About" />
         <meta
           name="description"
           content="Movsac is a trusted IT and staffing company providing innovative tech solutions and skilled professionals to businesses worldwide."

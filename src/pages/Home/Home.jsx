@@ -123,7 +123,7 @@ const Home = () => {
 {/* ✅ 2. Helmet yahan add kiya - PDF Page 1 ke mutabiq */}
 <Helmet>
     <title>IT Services – Software & Web Development Movsac</title>
-    {/* <meta property="og:title" content="IT Services – Software & Web Development | Movsac" /> */}
+    <meta property="og:title" content="IT Services – Software & Web Development | Movsac" />
 
     <meta 
         name="description" 
