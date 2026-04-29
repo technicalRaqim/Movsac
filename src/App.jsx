@@ -48,7 +48,7 @@ function App() {
       {/* ScrollToTop component ko Routes se pehle lazmi rakhein */}
       <ScrollToTop />
 
-      {loading && <SplashScreen onFinish={() => setLoading(false)} />}
+      <SplashScreen loading={loading} onFinish={() => setLoading(false)} />
 
       <div style={{
         opacity: loading ? 0 : 1,

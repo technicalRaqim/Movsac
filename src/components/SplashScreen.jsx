@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 
-const SplashScreen = ({ onFinish }) => {
+const SplashScreen = ({ loading, onFinish }) => {
   const videoRef = useRef(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -15,7 +15,7 @@ const SplashScreen = ({ onFinish }) => {
       height: "100%",
       backgroundColor: "#ffffff",
       zIndex: 9999,
-      display: "flex",
+      display: loading ? "flex" : "none",
       alignItems: "center",
       justifyContent: "center",
       overflow: "hidden",
@@ -64,15 +64,15 @@ const SplashScreen = ({ onFinish }) => {
     },
   };
 
-  // Desktop video style (full cover)
-  const desktopVideoStyle = {
+  // Desktop video style (outside useEffect for stability)
+  const desktopVideoStyle = useRef({
     position: "absolute",
     top: 0,
     left: 0,
     width: "100%",
     height: "100%",
     objectFit: "cover",
-  };
+  }).current;
 
   // Inject keyframes & CSS
   useEffect(() => {
@@ -141,6 +141,8 @@ const SplashScreen = ({ onFinish }) => {
     const video = videoRef.current;
     if (!video) return;
 
+    let fallbackTimeout;
+
     const applyVideoStyles = () => {
       const mobile = window.innerWidth <= 768;
       setIsMobile(mobile);
@@ -170,13 +172,14 @@ const SplashScreen = ({ onFinish }) => {
       video.play().catch(() => {});
     };
 
-    // ✅ Video khatam hone par hi onFinish call hoga
+    // Video khatam hone par onFinish call hoga
     const handleEnded = () => {
+      if (fallbackTimeout) clearTimeout(fallbackTimeout);
       setTimeout(onFinish, 200);
     };
 
     const handleError = () => {
-      // Error par bhi video khatam hone ka wait nahi karenge
+      if (fallbackTimeout) clearTimeout(fallbackTimeout);
       onFinish();
     };
 
@@ -186,8 +189,8 @@ const SplashScreen = ({ onFinish }) => {
 
     video.load();
 
-    // ❌ Fallback timeout - video khatam hone ka 8-second backup
-    const fallbackTimeout = setTimeout(() => {
+    // Fallback timeout - video khatam hone ka 8-second backup
+    fallbackTimeout = setTimeout(() => {
       onFinish();
     }, 8000);
 
@@ -199,13 +202,13 @@ const SplashScreen = ({ onFinish }) => {
     window.addEventListener("resize", handleResize);
 
     return () => {
+      if (fallbackTimeout) clearTimeout(fallbackTimeout);
       video.removeEventListener("canplaythrough", handleCanPlay);
       video.removeEventListener("ended", handleEnded);
       video.removeEventListener("error", handleError);
       window.removeEventListener("resize", handleResize);
-      clearTimeout(fallbackTimeout);
     };
-  }, [onFinish]);
+  }, [onFinish, desktopVideoStyle]);
 
   return (
     <div id="splash-screen-container" style={styles.container} className="splash-container">
