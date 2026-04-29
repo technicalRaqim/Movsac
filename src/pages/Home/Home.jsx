@@ -133,6 +133,11 @@ const Home = () => {
         name="keywords" 
         content="IT services, software development, web development, mobile apps" 
     />
+    <meta property="og:description" content="Movsac offers IT services including web development, mobile apps, software solutions, and digital transformation for modern businesses." />
+    <meta property="og:image" content="/img/Home/preview-image.png" />
+    <meta property="og:url" content="https://www.movsac.com/home" />
+    <meta property="og:url" content="https://www.movsac.com/" />
+
 </Helmet>
 
             <section className="hero-section">
