@@ -23,10 +23,10 @@ const routes = [
   },
   {
     path: '/services',
-    title: 'Our Services – IT Solutions & Consulting | Movsac',
-    description: 'Comprehensive IT services including software development, cloud operations, cybersecurity, and strategic technology consulting.',
-    keywords: 'IT services, consulting, cloud, cybersecurity',
-    ogTitle: 'Our Services – IT Solutions & Consulting | Movsac',
+    title: 'Our Services – IT Solutions, Staffing & Web Development | Movsac',
+    description: 'Explore Movsac services including IT solutions, software development, web development, and staffing services. Hire experts or build digital products with us.',
+    keywords: 'IT services, staffing services, recruitment, web development, software development, hire developers, IT company India',
+    ogTitle: 'Our Services – IT Solutions, Staffing & Web Development | Movsac',
   },
   {
     path: '/industries',
