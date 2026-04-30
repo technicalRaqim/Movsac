@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState, useLayoutEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
-const SplashScreen = ({ loading, onFinish }) => {
+const SplashScreen = ({ onFinish }) => {
   const videoRef = useRef(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -15,7 +15,7 @@ const SplashScreen = ({ loading, onFinish }) => {
       height: "100%",
       backgroundColor: "#ffffff",
       zIndex: 9999,
-      display: loading ? "flex" : "none",
+      display: "flex",
       alignItems: "center",
       justifyContent: "center",
       overflow: "hidden",
@@ -64,18 +64,18 @@ const SplashScreen = ({ loading, onFinish }) => {
     },
   };
 
-  // Desktop video style (outside useEffect for stability)
-  const desktopVideoStyle = useRef({
+  // Desktop video style (full cover)
+  const desktopVideoStyle = {
     position: "absolute",
     top: 0,
     left: 0,
     width: "100%",
     height: "100%",
     objectFit: "cover",
-  }).current;
+  };
 
   // Inject keyframes & CSS
-  useLayoutEffect(() => {
+  useEffect(() => {
     const styleSheet = document.createElement("style");
     styleSheet.id = "splash-screen-styles";
     styleSheet.innerText = `
@@ -136,12 +136,10 @@ const SplashScreen = ({ loading, onFinish }) => {
     };
   }, []);
 
-  // Video load and play - use useEffect for server safety
+  // Video load and play
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
-
-    let fallbackTimeout;
 
     const applyVideoStyles = () => {
       const mobile = window.innerWidth <= 768;
@@ -172,13 +170,13 @@ const SplashScreen = ({ loading, onFinish }) => {
       video.play().catch(() => {});
     };
 
+    // ✅ Video khatam hone par hi onFinish call hoga
     const handleEnded = () => {
-      if (fallbackTimeout) clearTimeout(fallbackTimeout);
       setTimeout(onFinish, 200);
     };
 
     const handleError = () => {
-      if (fallbackTimeout) clearTimeout(fallbackTimeout);
+      // Error par bhi video khatam hone ka wait nahi karenge
       onFinish();
     };
 
@@ -188,11 +186,9 @@ const SplashScreen = ({ loading, onFinish }) => {
 
     video.load();
 
-    // Fallback timeout - video khatam hone ka 8-second backup
-    fallbackTimeout = setTimeout(() => {
-      onFinish();
-    }, 8000);
+    // ❌ Fallback timeout remove kar diya - ab video khatam hone ka wait hoga
 
+    // Resize handler
     const handleResize = () => {
       applyVideoStyles();
     };
@@ -200,13 +196,12 @@ const SplashScreen = ({ loading, onFinish }) => {
     window.addEventListener("resize", handleResize);
 
     return () => {
-      if (fallbackTimeout) clearTimeout(fallbackTimeout);
       video.removeEventListener("canplaythrough", handleCanPlay);
       video.removeEventListener("ended", handleEnded);
       video.removeEventListener("error", handleError);
       window.removeEventListener("resize", handleResize);
     };
-  }, [onFinish, desktopVideoStyle]);
+  }, [onFinish]);
 
   return (
     <div id="splash-screen-container" style={styles.container} className="splash-container">
@@ -223,7 +218,6 @@ const SplashScreen = ({ loading, onFinish }) => {
           ref={videoRef}
           src="/preloader.mov"
           muted
-          autoPlay
           playsInline
           preload="auto"
           className={isMobile ? "splash-video-mobile" : "splash-video-desktop"}
