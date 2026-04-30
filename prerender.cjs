@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-const { JSDOM } = require('jsdom');
 
 const DIST_DIR = path.resolve(__dirname, 'dist');
 const INDEX_HTML = path.join(DIST_DIR, 'index.html');
@@ -58,7 +57,11 @@ const routes = [
   },
 ];
 
-async function prerender() {
+function generateMetaTags(route) {
+  return `  <meta name="description" content="${route.description}">\n  <meta name="keywords" content="${route.keywords}">\n  <meta property="og:title" content="${route.ogTitle}">\n  <meta property="og:description" content="${route.description}">`;
+}
+
+function prerender() {
   if (!fs.existsSync(INDEX_HTML)) {
     console.error('Error: dist/index.html not found. Run npm run build first.');
     process.exit(1);
@@ -74,54 +77,28 @@ async function prerender() {
     // Create directory
     fs.mkdirSync(routeDir, { recursive: true });
 
-    // Clone index.html and inject meta tags
-    const dom = new JSDOM(indexHtml);
-    const { document } = dom.window;
+    // Check if meta tags already exist
+    const metaPattern = /<meta name="description" content=".*?">\s*<meta name="keywords" content=".*?">\s*<meta property="og:title" content=".*?">\s*<meta property="og:description" content=".*?">/s;
+    const hasMetaTags = metaPattern.test(indexHtml);
 
-    // Update or create title
-    const titleEl = document.querySelector('title');
-    if (titleEl) {
-      titleEl.textContent = route.title;
+    let html;
+    if (hasMetaTags) {
+      // Replace title and meta tags
+      html = indexHtml
+        .replace(/<title>.*?<\/title>/s, `<title>${route.title}</title>`)
+        .replace(metaPattern, generateMetaTags(route));
+    } else {
+      // Insert meta tags after the closing </title> tag
+      html = indexHtml
+        .replace(/<title>.*?<\/title>/s, `<title>${route.title}</title>`)
+        .replace('</title>', `</title>\n${generateMetaTags(route)}`);
     }
 
-    // Find existing meta tags and update/create them
-    function updateOrCreateMeta(name, content) {
-      // Try property (og:title) first
-      let meta = document.querySelector(`meta[property="${name}"]`);
-      if (!meta) {
-        // Try name attribute
-        meta = document.querySelector(`meta[name="${name}"]`);
-      }
-      if (meta) {
-        meta.setAttribute('content', content);
-      } else {
-        // Create new meta tag
-        meta = document.createElement('meta');
-        if (name.startsWith('og:')) {
-          meta.setAttribute('property', name);
-        } else {
-          meta.setAttribute('name', name);
-        }
-        meta.setAttribute('content', content);
-        document.querySelector('head').appendChild(meta);
-      }
-    }
-
-    // Set meta tags
-    updateOrCreateMeta('description', route.description);
-    updateOrCreateMeta('keywords', route.keywords);
-    updateOrCreateMeta('og:title', route.ogTitle);
-    updateOrCreateMeta('og:description', route.description);
-
-    const html = dom.serialize();
-    fs.writeFileSync(routeFile, html);
+    fs.writeFileSync(routeFile, html, 'utf-8');
     console.log(`✓ Generated: ${routeFile}`);
   }
 
   console.log('\n✓ Prerendering complete!');
 }
 
-prerender().catch(err => {
-  console.error(err);
-  process.exit(1);
-});
+prerender();

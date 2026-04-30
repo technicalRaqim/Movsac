@@ -3,10 +3,13 @@
   "outputDirectory": "dist",
   "framework": null,
   "installCommand": "npm install",
-  "cleanUrls": true,
   "routes": [
-    { "handle": "filesystem" },
-    { "src": "/(.+)", "dest": "/$1/index.html" },
+    { "src": "/about", "dest": "/about/index.html" },
+    { "src": "/services", "dest": "/services/index.html" },
+    { "src": "/industries", "dest": "/industries/index.html" },
+    { "src": "/portfolio", "dest": "/portfolio/index.html" },
+    { "src": "/insight", "dest": "/insight/index.html" },
+    { "src": "/contact", "dest": "/contact/index.html" },
     { "src": "/", "dest": "/index.html" }
   ]
 }
