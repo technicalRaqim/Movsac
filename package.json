@@ -7,8 +7,23 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "postbuild": "react-snap"
   },
+  "reactSnap": {
+    "source": "dist",
+    "inlineCss": true,
+    "routes": [
+      "/",
+      "/about",
+      "/services",
+      "/industries",
+      "/portfolio",
+      "/insight",
+      "/contact"
+    ],
+    "puppeteerArgs": ["--no-sandbox", "--disable-setuid-sandbox"]
+},
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
     "@gsap/react": "^2.1.2",
@@ -20,7 +35,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet-async": "^3.0.0",
-    "react-router-dom": "^7.14.0"
+    "react-router-dom": "^7.14.0",
+    "react-snap": "^1.23.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.4",
