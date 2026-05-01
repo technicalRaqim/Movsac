@@ -128,7 +128,7 @@ export default function Portfolio() {
     },
 
     {
-      id: 12,
+      id: 11,
       title: 'SK Telecom',
       description: 'Telecom super app with real-time data management and digital ecosystem',
       image: '/img/csview/SKTelecom/big.png',

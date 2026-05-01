@@ -105,7 +105,7 @@ const Footer = () => {
                         <div className="client-box" data-aos="fade-up" data-aos-delay="200">
                             <img src="/img/Footer-logos/sgn.png" alt="Qumash" className="client-logo " data-aos="zoom-in" data-aos-delay="250" />
                             <p className="client-desc" data-aos="fade-up" data-aos-delay="300">
-                                Qumash is a marketplace for unique global designs, aiming to connect the world and showcase...
+                                Guatemala is a marketplace for unique global designs, aiming to connect the world and showcase...
                             </p>
                         </div>
                         <div className="client-box" data-aos="fade-up" data-aos-delay="300">
