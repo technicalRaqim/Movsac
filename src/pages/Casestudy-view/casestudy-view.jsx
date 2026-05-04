@@ -733,7 +733,7 @@ export default function CaseStudyView() {
             },
             bigimg: "/img/csview/Byd/big.png",
             links: {
-                viewApp: "https://play.google.com/store/apps/details?id=com.skylexit.skylex_app",
+                viewApp: "https://play.google.com/store/apps/details?id=com.byd.bydautolink",
                 viewWebsite: "https://www.bydbahrain.com/"
             },
             objective: {

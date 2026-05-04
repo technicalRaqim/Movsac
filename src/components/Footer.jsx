@@ -103,9 +103,9 @@ const Footer = () => {
                             </p>
                         </div>
                         <div className="client-box" data-aos="fade-up" data-aos-delay="200">
-                            <img src="/img/Footer-logos/sgn.png" alt="Qumash" className="client-logo " data-aos="zoom-in" data-aos-delay="250" />
+                            <img src="/img/Footer-logos/guatemala.png" alt="Qumash" className="client-logo " data-aos="zoom-in" data-aos-delay="250" />
                             <p className="client-desc" data-aos="fade-up" data-aos-delay="300">
-                                Guatemala is a marketplace for unique global designs, aiming to connect the world and showcase...
+                                Guatemala, a Central American country south of Mexico, is home to volcanoes, rainforests and ancient Mayan sites.
                             </p>
                         </div>
                         <div className="client-box" data-aos="fade-up" data-aos-delay="300">
